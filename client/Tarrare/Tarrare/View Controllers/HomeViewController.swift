@@ -74,8 +74,8 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate {
     
     func requestUserCurrentPlace() {
         APIManager.shared().getCurrentPlace(completion: {place in
-            place.createPlace(completion: {createdPlace in
-                Place.setCurrent(place, writeToUserDefaults: true)
+            place.createPlace(completion: {currentPlace in 
+              self.currentPlace = currentPlace
             })
         })
     }

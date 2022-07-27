@@ -11,6 +11,7 @@ import UIKit
 class MainTabBarController: UITabBarController {
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.startMatchListener()
         view.backgroundColor = .white
         
         let homeVC = UINavigationController(rootViewController: HomeViewController())
@@ -28,6 +29,21 @@ class MainTabBarController: UITabBarController {
         self.viewControllers = [homeVC, messagesVC, profileVC]
         self.tabBar.tintColor = .black
         self.tabBar.unselectedItemTintColor = .darkGray
+    }
+    
+    // MARK: - GraphQL App Lifetime Subscriptions
+    
+    func startMatchListener() {
+        Match.newMatchListen { newMatch in
+            guard let match = newMatch else { return }
+            guard let currentDelivery = Delivery.userCurrent else { return }
+            
+            if match.delivery == currentDelivery {
+                let newOfferVC = NewOfferViewController()
+                newOfferVC.match = newMatch
+                self.present(UINavigationController(rootViewController: newOfferVC), animated: true)
+            }
+        }
     }
     
 }

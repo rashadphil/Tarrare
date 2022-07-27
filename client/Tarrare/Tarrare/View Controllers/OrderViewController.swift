@@ -18,10 +18,6 @@ class OrderViewController: UIViewController, UITableViewDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        if let currentPlace = Place.getCurrent() {
-            setCurrentPlace(place: currentPlace)
-        }
-        
         fetchDeliveries()
         
         view.backgroundColor = .white
@@ -160,16 +156,12 @@ class OrderViewController: UIViewController, UITableViewDelegate {
     }()
     
     func setCurrentPlace(place: Place) {
-        Place.setCurrent(place, writeToUserDefaults: true)
         self.currentPlace = place
         self.currentLocationLabel.setText(text: place.name)
     }
     
     @objc private func refreshDeliveryData(_ sender: Any) {
         fetchDeliveries()
-        if let currentPlace = Place.getCurrent() {
-            self.setCurrentPlace(place: currentPlace)
-        }
     }
     
     func fetchDeliveries() {
@@ -210,10 +202,11 @@ extension OrderViewController : SelectLocationViewDelegate {
 }
 
 extension OrderViewController : DeliveryCellProtocol {
-    func didTapChatIcon(tappedUser: User) {
+    func didTapChatIcon(tappedDelivery: Delivery) {
         let individualChatVC = IndividualChatViewController()
         
-        individualChatVC.targetUser = tappedUser
+        individualChatVC.targetUser = tappedDelivery.user
+        individualChatVC.deliveryInfo = tappedDelivery
         self.parentNavController?.pushViewController(individualChatVC, animated: true)
         
     }

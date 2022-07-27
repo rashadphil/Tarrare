@@ -42,13 +42,6 @@ class User: Codable {
         return user
     }
     
-    func toggleDeliveryStatus(completion: @escaping(User?) -> Void) {
-        APIManager.shared().call(key: "toggleUserDeliveryStatus", mutation: ToggleUserDeliveryStatusMutation(id: self.id, delivering: !(self.delivering)), completion: completion)
-    }
-    
-    
-    
-    
 }
 
 extension User: Equatable {

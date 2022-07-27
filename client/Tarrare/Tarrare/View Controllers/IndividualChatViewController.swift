@@ -14,6 +14,7 @@ class IndividualChatViewController : MessagesViewController {
     var messageArray: [Message] = [Message]()
     var currentUser: User = User.getCurrent()!
     public var targetUser: User?
+    public var deliveryInfo : Delivery?
     
     private let formatter: DateFormatter = {
         let formatter = DateFormatter()
@@ -41,7 +42,26 @@ class IndividualChatViewController : MessagesViewController {
     func setupNavbar() {
         navigationItem.titleView?.tintColor = .black
         navigationItem.title = self.targetUser?.firstName
+        navigationItem.rightBarButtonItem = UIBarButtonItem(customView: requestButton)
     }
+    
+    private let requestButton : UIButton = {
+        let button = UIButton()
+        button.setTitle("Request ", for: .normal)
+        button.setTitleColor(.white, for: .normal)
+        button.titleLabel?.font = UIFont(name: "Inter-Regular", size: 15)
+        button.backgroundColor = .black
+        button.layer.cornerRadius = 15
+        button.frame = CGRect(x: 0, y: 0, width: 90, height: 40)
+        
+        
+        let buttonImage = UIImage(systemName: "takeoutbag.and.cup.and.straw")
+        button.setImage(buttonImage, for: .normal)
+        button.tintColor = .white
+        
+        button.addTarget(self, action: #selector(didTapRequestButton), for: .touchUpInside)
+        return button
+    }()
     
     // MARK: - API Requests
     
@@ -110,6 +130,17 @@ class IndividualChatViewController : MessagesViewController {
             for: .highlighted
         )
     }
+    
+    // MARK: - Gestures/Actions
+    @objc func didTapRequestButton() {
+        guard let deliveryInfo = deliveryInfo else { return }
+        guard let currentUser = User.getCurrent() else { return }
+        
+        Order.createOrder(userId: currentUser.id, resturantPlaceId: deliveryInfo.resturantPlaceId, deliveryBuildingPlaceId: deliveryInfo.deliveryBuildingPlaceId, completion: { createdOrder in
+
+            Order.userCurrent = createdOrder
+        })
+    }
 }
 
 // MARK: - Data Source
@@ -142,10 +173,7 @@ extension IndividualChatViewController: MessagesLayoutDelegate {
     func heightForLocation(message: MessageType, at indexPath: IndexPath, with maxWidth: CGFloat, in messagesCollectionView: MessagesCollectionView) -> CGFloat {
         return 0
     }
-    
-    
 }
-
 
 // MARK: - DisplayDelegate
 extension IndividualChatViewController: MessagesDisplayDelegate {

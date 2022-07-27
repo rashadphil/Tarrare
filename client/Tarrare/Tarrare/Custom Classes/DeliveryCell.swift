@@ -9,7 +9,7 @@ import Foundation
 import UIKit
 
 protocol DeliveryCellProtocol {
-    func didTapChatIcon(tappedUser: User)
+    func didTapChatIcon(tappedDelivery: Delivery)
 }
 
 class DeliveryCell : UITableViewCell {
@@ -17,8 +17,8 @@ class DeliveryCell : UITableViewCell {
     var delivery: Delivery? {
         didSet {
             delivererNameLabel.text = delivery?.user.firstName
-            resturantLabel.text = delivery?.resturant?.place.name
-            deliveryLocationLabel.text = delivery?.deliveryBuilding?.place.name
+            resturantLabel.text = delivery?.resturant.place.name
+            deliveryLocationLabel.text = delivery?.deliveryBuilding.place.name
         }
     }
     var delegate : DeliveryCellProtocol!
@@ -134,7 +134,7 @@ class DeliveryCell : UITableViewCell {
     
     @objc func didTapChatIcon(_ sender: Any) {
         if let delivery = delivery {
-            self.delegate.didTapChatIcon(tappedUser: delivery.user)
+            self.delegate.didTapChatIcon(tappedDelivery: delivery)
         }
     }
     

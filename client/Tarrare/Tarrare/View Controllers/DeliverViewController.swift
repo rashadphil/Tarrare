@@ -11,18 +11,16 @@ import CoreLocation
 
 class DeliverViewController: UIViewController, CLLocationManagerDelegate {
     
-    var currentResturant: Place? = Place.getCurrent()
+    var currentResturant: Place? 
     var deliveryBuilding: Place?
     var tappedLocationLabel: UILabel?
     var user : User! = User.getCurrent()
     var parentNavController: UINavigationController?
+    var currentDelivery : Delivery? = Delivery.userCurrent
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        updateDeliveryStatusLabel()
-        if let currentResturant = currentResturant {
-            setCurrentResturant(place: currentResturant)
-        }
+        updateDeliveryLabels()
         
         view.backgroundColor = .white
         
@@ -164,18 +162,35 @@ class DeliverViewController: UIViewController, CLLocationManagerDelegate {
     
     func placeDeliverRequest() {
         if let currentResturant = currentResturant, let deliveryBuilding = deliveryBuilding {
-            let delivery = Delivery(user: self.user, resturant: currentResturant, deliveryBuilding: deliveryBuilding)
-            delivery.createDelivery(completion: {_ in
+            Delivery.createDelivery(userId: self.user.id, orderStatus: "placed", resturantPlaceId: currentResturant.id, deliveryBuildingPlaceId: deliveryBuilding.id, completion: {createdDelivery in
                 
+                Delivery.userCurrent = createdDelivery
+                self.currentDelivery = createdDelivery
+                self.updateDeliveryLabels()
             })
-            
         }
     }
     
     func cancelDeliverRequest() {
-        Delivery.cancelDeliveryRequestForUser(user, completion: {_ in
+        guard let currentDelivery = currentDelivery else { return }
+
+        Delivery.cancelDelivery(deliveryId: currentDelivery.id, completion: {_ in
             
+            Delivery.userCurrent = nil
+            self.currentDelivery = nil
+            self.updateDeliveryLabels()
         })
+    }
+    
+    func updateDeliveryLabels() {
+        guard let currentDelivery = currentDelivery else {
+            self.updateDeliveryStatusLabel(false)
+            return
+        }
+
+        self.setCurrentResturant(place: currentDelivery.resturant.place)
+        self.setCurrentDeliveryLocation(place: currentDelivery.deliveryBuilding.place)
+        self.updateDeliveryStatusLabel(true)
     }
     
     func updateDeliveryStatusLabel(_ status : Bool? = nil) {
@@ -192,27 +207,14 @@ class DeliverViewController: UIViewController, CLLocationManagerDelegate {
     }
     
     func toggleUserDeliveryStatus() {
-        // update UI before making request
-        self.updateDeliveryStatusLabel(!self.user.delivering)
-        
-        user.toggleDeliveryStatus(completion: {(responseUser) in
-            if let responseUser = responseUser {
-                User.setCurrent(responseUser, writeToUserDefaults: true)
-
-                self.user = responseUser
-                
-                if (self.user.delivering == true) {
-                    self.placeDeliverRequest()
-                } else {
-                    self.cancelDeliverRequest()
-                }
-            }
-        })
-        
+        if currentDelivery == nil {
+            self.placeDeliverRequest()
+        } else {
+            self.cancelDeliverRequest()
+        }
     }
     
     func setCurrentResturant(place: Place) {
-        Place.setCurrent(place, writeToUserDefaults: true)
         self.currentResturant = place
         self.resturantLocationLabel.setText(text: place.name)
     }
