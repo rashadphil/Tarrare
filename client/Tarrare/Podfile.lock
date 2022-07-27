@@ -21,7 +21,6 @@ PODS:
     - GoogleUtilities/Environment (~> 7.7)
     - nanopb (< 2.30910.0, >= 2.30908.0)
     - PromisesObjC (< 3.0, >= 1.2)
-  - GooglePlaces (7.0.0)
   - GoogleUtilities/AppDelegateSwizzler (7.7.0):
     - GoogleUtilities/Environment
     - GoogleUtilities/Logger
@@ -48,7 +47,6 @@ PODS:
 DEPENDENCIES:
   - Alamofire
   - FirebaseAuth
-  - GooglePlaces
 
 SPEC REPOS:
   trunk:
@@ -58,7 +56,6 @@ SPEC REPOS:
     - FirebaseCoreDiagnostics
     - FirebaseCoreInternal
     - GoogleDataTransport
-    - GooglePlaces
     - GoogleUtilities
     - GTMSessionFetcher
     - nanopb
@@ -71,12 +68,11 @@ SPEC CHECKSUMS:
   FirebaseCoreDiagnostics: ad3f6c68b7c5b63b7cf15b0785d7137f05f32268
   FirebaseCoreInternal: cb966328b6985dbd6f535e1461291063e1c4a00f
   GoogleDataTransport: 5fffe35792f8b96ec8d6775f5eccd83c998d5a3b
-  GooglePlaces: 8dba710bed6160a2e4b85e84aaafdbcc0b4010d8
   GoogleUtilities: e0913149f6b0625b553d70dae12b49fc62914fd1
   GTMSessionFetcher: 681175626052e03fdde7952f7e9c7a9785719506
   nanopb: b552cce312b6c8484180ef47159bc0f65a1f0431
   PromisesObjC: ab77feca74fa2823e7af4249b8326368e61014cb
 
-PODFILE CHECKSUM: c98a275aab1a6bbfa41438cf92b38d0b5203d135
+PODFILE CHECKSUM: d06778d05c29ab5e4b681002326150e5f316c9ce
 
 COCOAPODS: 1.11.3

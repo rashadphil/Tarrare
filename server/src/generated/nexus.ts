@@ -44,6 +44,11 @@ export interface NexusGenScalars {
 }
 
 export interface NexusGenObjects {
+  Convo: { // root type
+    id: number; // Int!
+    memberOneId: number; // Int!
+    memberTwoId: number; // Int!
+  }
   Delivery: { // root type
     deliveryBuildingPlaceId: number; // Int!
     id: number; // Int!
@@ -54,7 +59,16 @@ export interface NexusGenObjects {
   DeliveryBuilding: { // root type
     placeId: number; // Int!
   }
+  Match: { // root type
+    completed: boolean; // Boolean!
+    delivererAccepted: boolean; // Boolean!
+    deliveryId: number; // Int!
+    id: number; // Int!
+    orderId: number; // Int!
+    ordererAccepted: boolean; // Boolean!
+  }
   Message: { // root type
+    convoId: number; // Int!
     createdAt: NexusGenScalars['DateTime']; // DateTime!
     id: number; // Int!
     recieverId: number; // Int!
@@ -62,6 +76,13 @@ export interface NexusGenObjects {
     text: string; // String!
   }
   Mutation: {};
+  Order: { // root type
+    deliveryBuildingPlaceId: number; // Int!
+    id: number; // Int!
+    orderStatus: string; // String!
+    resturantPlaceId: number; // Int!
+    userId: number; // Int!
+  }
   Place: { // root type
     city: string; // String!
     fullAddress: string; // String!
@@ -69,6 +90,7 @@ export interface NexusGenObjects {
     id: number; // Int!
     name: string; // String!
     state: string; // String!
+    streetAddress: string; // String!
     zipcode: number; // Int!
   }
   Query: {};
@@ -100,6 +122,14 @@ export type NexusGenRootTypes = NexusGenObjects
 export type NexusGenAllTypes = NexusGenRootTypes & NexusGenScalars
 
 export interface NexusGenFieldTypes {
+  Convo: { // field return type
+    id: number; // Int!
+    memberOne: NexusGenRootTypes['User'] | null; // User
+    memberOneId: number; // Int!
+    memberTwo: NexusGenRootTypes['User'] | null; // User
+    memberTwoId: number; // Int!
+    messages: Array<NexusGenRootTypes['Message'] | null>; // [Message]!
+  }
   Delivery: { // field return type
     deliveryBuilding: NexusGenRootTypes['DeliveryBuilding'] | null; // DeliveryBuilding
     deliveryBuildingPlaceId: number; // Int!
@@ -114,7 +144,19 @@ export interface NexusGenFieldTypes {
     place: NexusGenRootTypes['Place'] | null; // Place
     placeId: number; // Int!
   }
+  Match: { // field return type
+    completed: boolean; // Boolean!
+    delivererAccepted: boolean; // Boolean!
+    delivery: NexusGenRootTypes['Delivery'] | null; // Delivery
+    deliveryId: number; // Int!
+    id: number; // Int!
+    order: NexusGenRootTypes['Order'] | null; // Order
+    orderId: number; // Int!
+    ordererAccepted: boolean; // Boolean!
+  }
   Message: { // field return type
+    convo: NexusGenRootTypes['Convo'] | null; // Convo
+    convoId: number; // Int!
     createdAt: NexusGenScalars['DateTime']; // DateTime!
     id: number; // Int!
     reciever: NexusGenRootTypes['User'] | null; // User
@@ -124,12 +166,26 @@ export interface NexusGenFieldTypes {
     text: string; // String!
   }
   Mutation: { // field return type
+    acceptMatch: NexusGenRootTypes['Match'] | null; // Match
+    cancelDelivery: NexusGenRootTypes['Delivery'] | null; // Delivery
+    cancelOrder: NexusGenRootTypes['Order'] | null; // Order
     createMessage: NexusGenRootTypes['Message'] | null; // Message
     createPlace: NexusGenRootTypes['Place'] | null; // Place
+    declineMatch: NexusGenRootTypes['Match'] | null; // Match
     login: NexusGenRootTypes['User'] | null; // User
     register: NexusGenRootTypes['User'] | null; // User
-    toggleUserDeliveryStatus: NexusGenRootTypes['User'] | null; // User
     upsertDelivery: NexusGenRootTypes['Delivery'] | null; // Delivery
+    upsertOrder: NexusGenRootTypes['Order'] | null; // Order
+  }
+  Order: { // field return type
+    deliveryBuilding: NexusGenRootTypes['DeliveryBuilding'] | null; // DeliveryBuilding
+    deliveryBuildingPlaceId: number; // Int!
+    id: number; // Int!
+    orderStatus: string; // String!
+    resturant: NexusGenRootTypes['Resturant'] | null; // Resturant
+    resturantPlaceId: number; // Int!
+    user: NexusGenRootTypes['User'] | null; // User
+    userId: number; // Int!
   }
   Place: { // field return type
     city: string; // String!
@@ -138,18 +194,24 @@ export interface NexusGenFieldTypes {
     id: number; // Int!
     name: string; // String!
     state: string; // String!
+    streetAddress: string; // String!
     zipcode: number; // Int!
   }
   Query: { // field return type
     allDeliveries: Array<NexusGenRootTypes['Delivery'] | null>; // [Delivery]!
     allUsers: NexusGenRootTypes['User'][]; // [User!]!
     getConversation: Array<NexusGenRootTypes['Message'] | null>; // [Message]!
+    getUserConversations: Array<NexusGenRootTypes['Convo'] | null>; // [Convo]!
+    getUserDelivery: NexusGenRootTypes['Delivery'] | null; // Delivery
+    getUserOrder: NexusGenRootTypes['Order'] | null; // Order
   }
   Resturant: { // field return type
     place: NexusGenRootTypes['Place'] | null; // Place
     placeId: number; // Int!
   }
   Subscription: { // field return type
+    matchUpdate: NexusGenRootTypes['Match'] | null; // Match
+    newMatch: NexusGenRootTypes['Match'] | null; // Match
     newMessage: NexusGenRootTypes['Message'] | null; // Message
   }
   User: { // field return type
@@ -166,6 +228,14 @@ export interface NexusGenFieldTypes {
 }
 
 export interface NexusGenFieldTypeNames {
+  Convo: { // field return type name
+    id: 'Int'
+    memberOne: 'User'
+    memberOneId: 'Int'
+    memberTwo: 'User'
+    memberTwoId: 'Int'
+    messages: 'Message'
+  }
   Delivery: { // field return type name
     deliveryBuilding: 'DeliveryBuilding'
     deliveryBuildingPlaceId: 'Int'
@@ -180,7 +250,19 @@ export interface NexusGenFieldTypeNames {
     place: 'Place'
     placeId: 'Int'
   }
+  Match: { // field return type name
+    completed: 'Boolean'
+    delivererAccepted: 'Boolean'
+    delivery: 'Delivery'
+    deliveryId: 'Int'
+    id: 'Int'
+    order: 'Order'
+    orderId: 'Int'
+    ordererAccepted: 'Boolean'
+  }
   Message: { // field return type name
+    convo: 'Convo'
+    convoId: 'Int'
     createdAt: 'DateTime'
     id: 'Int'
     reciever: 'User'
@@ -190,12 +272,26 @@ export interface NexusGenFieldTypeNames {
     text: 'String'
   }
   Mutation: { // field return type name
+    acceptMatch: 'Match'
+    cancelDelivery: 'Delivery'
+    cancelOrder: 'Order'
     createMessage: 'Message'
     createPlace: 'Place'
+    declineMatch: 'Match'
     login: 'User'
     register: 'User'
-    toggleUserDeliveryStatus: 'User'
     upsertDelivery: 'Delivery'
+    upsertOrder: 'Order'
+  }
+  Order: { // field return type name
+    deliveryBuilding: 'DeliveryBuilding'
+    deliveryBuildingPlaceId: 'Int'
+    id: 'Int'
+    orderStatus: 'String'
+    resturant: 'Resturant'
+    resturantPlaceId: 'Int'
+    user: 'User'
+    userId: 'Int'
   }
   Place: { // field return type name
     city: 'String'
@@ -204,18 +300,24 @@ export interface NexusGenFieldTypeNames {
     id: 'Int'
     name: 'String'
     state: 'String'
+    streetAddress: 'String'
     zipcode: 'Int'
   }
   Query: { // field return type name
     allDeliveries: 'Delivery'
     allUsers: 'User'
     getConversation: 'Message'
+    getUserConversations: 'Convo'
+    getUserDelivery: 'Delivery'
+    getUserOrder: 'Order'
   }
   Resturant: { // field return type name
     place: 'Place'
     placeId: 'Int'
   }
   Subscription: { // field return type name
+    matchUpdate: 'Match'
+    newMatch: 'Match'
     newMessage: 'Message'
   }
   User: { // field return type name
@@ -233,6 +335,15 @@ export interface NexusGenFieldTypeNames {
 
 export interface NexusGenArgTypes {
   Mutation: {
+    acceptMatch: { // args
+      matchId: number; // Int!
+    }
+    cancelDelivery: { // args
+      deliveryId: number; // Int!
+    }
+    cancelOrder: { // args
+      orderId: number; // Int!
+    }
     createMessage: { // args
       recieverId: number; // Int!
       senderId: number; // Int!
@@ -244,7 +355,11 @@ export interface NexusGenArgTypes {
       googlePlaceId: string; // String!
       name: string; // String!
       state: string; // String!
+      streetAddress: string; // String!
       zipcode: number; // Int!
+    }
+    declineMatch: { // args
+      matchId: number; // Int!
     }
     login: { // args
       email: string; // String!
@@ -256,14 +371,16 @@ export interface NexusGenArgTypes {
       lastName: string; // String!
       password: string; // String!
     }
-    toggleUserDeliveryStatus: { // args
-      delivering: boolean; // Boolean!
-      id: number; // Int!
-    }
     upsertDelivery: { // args
-      deliveryBuildingPlaceId?: number | null; // Int
+      deliveryBuildingPlaceId: number; // Int!
       orderStatus: string; // String!
-      resturantPlaceId?: number | null; // Int
+      resturantPlaceId: number; // Int!
+      userId: number; // Int!
+    }
+    upsertOrder: { // args
+      deliveryBuildingPlaceId: number; // Int!
+      orderStatus: string; // String!
+      resturantPlaceId: number; // Int!
       userId: number; // Int!
     }
   }
@@ -271,6 +388,15 @@ export interface NexusGenArgTypes {
     getConversation: { // args
       recieverId: number; // Int!
       senderId: number; // Int!
+    }
+    getUserConversations: { // args
+      currentUserId: number; // Int!
+    }
+    getUserDelivery: { // args
+      userId: number; // Int!
+    }
+    getUserOrder: { // args
+      userId: number; // Int!
     }
   }
   Subscription: {
