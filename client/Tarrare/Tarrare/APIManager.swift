@@ -15,7 +15,6 @@ import FirebaseAuth
 class APIManager {
     
     var endpointURL = "http://localhost:62528/graphql"
-//    var endpointURL = "https://f036-2600-387-c-6c11-00-6.ngrok.io/graphql"
     
     /// A web socket transport to use for subscriptions
     private lazy var webSocketTransport: WebSocketTransport = {
@@ -89,11 +88,11 @@ class APIManager {
     // Query
     func call<T: Decodable, Query: GraphQLQuery>(key: String, query: Query, cachePolicy : CachePolicy = .fetchIgnoringCacheCompletely, completion: @escaping(T?) -> Void) {
         
-        
         apollo.fetch(query: query, cachePolicy: cachePolicy, resultHandler: {result in
             switch result {
             case .success(let graphQLResult):
                 guard let object : T = self.processGraphQLResult(key: key, json: graphQLResult.data?.jsonObject as? JSONObject) else {
+                    completion(nil)
                     return
                 }
                 completion(object)
@@ -112,6 +111,7 @@ class APIManager {
             switch result {
             case .success(let graphQLResult):
                 guard let object : T = self.processGraphQLResult(key: key, json: graphQLResult.data?.jsonObject as? JSONObject) else {
+                    completion(nil)
                     return
                 }
                 completion(object)
@@ -124,11 +124,12 @@ class APIManager {
     }
     
     // Subscription
-    func call<T: Decodable, Subscription: GraphQLSubscription>(key: String, subscription: Subscription, completion: @escaping(T?) -> Void) {
-        apollo.subscribe(subscription: subscription , resultHandler: {result in
+    func call<T: Decodable, Subscription: GraphQLSubscription>(key: String, subscription: Subscription, completion: @escaping(T?) -> Void) -> Cancellable {
+        let subscription = apollo.subscribe(subscription: subscription , resultHandler: {result in
             switch result {
             case .success(let graphQLResult):
                 guard let object : T = self.processGraphQLResult(key: key, json: graphQLResult.data?.jsonObject as? JSONObject) else {
+                    completion(nil)
                     return
                 }
                 completion(object)
@@ -138,6 +139,7 @@ class APIManager {
                 break
             }
         })
+        return subscription
     }
     
     

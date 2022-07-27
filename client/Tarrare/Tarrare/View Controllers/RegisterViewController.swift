@@ -146,9 +146,9 @@ class RegisterViewController: UIViewController {
     }()
     
     func presentHomeVC() {
-        let mainTabBarController = MainTabBarController()
-        mainTabBarController.modalPresentationStyle = .fullScreen
-        self.present(mainTabBarController, animated: true)
+        let appLoadingVC = AppLoadingViewController()
+        appLoadingVC.modalPresentationStyle = .fullScreen
+        self.present(appLoadingVC, animated: false)
     }
     
     // GESTURES / ACTIONS

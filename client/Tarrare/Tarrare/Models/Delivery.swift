@@ -17,13 +17,13 @@ enum Status: String, Codable {
 }
 
 class Delivery: Codable {
-    var id : Int = 0
+    var id : Int 
     var orderStatus : String
     var user : User
-    var userId : Int = 0
-    var resturant: Resturant?
+    var userId : Int 
+    var resturant: Resturant
     var resturantPlaceId: Int
-    var deliveryBuilding: DeliveryBuilding?
+    var deliveryBuilding: DeliveryBuilding
     var deliveryBuildingPlaceId: Int
     
     enum CodingKeys: String, CodingKey {
@@ -37,32 +37,42 @@ class Delivery: Codable {
         case deliveryBuildingPlaceId
     }
     
-    
-    init(user: User, resturant: Place, deliveryBuilding: Place) {
-        self.orderStatus = "placed"
-        self.user = user
-        self.userId = user.id
-        self.resturant = Resturant(resturant)
-        self.resturantPlaceId = resturant.id
-        self.deliveryBuilding = DeliveryBuilding(deliveryBuilding)
-        self.deliveryBuildingPlaceId = deliveryBuilding.id
+    // Tracks user's delivery for app lifetime (initialized at start)
+    private static var _userCurrent: Delivery?
+    static var userCurrent: Delivery? {
+        get {return _userCurrent}
+        set (delivery) {
+            _userCurrent = delivery
+        }
     }
     
-    // send delivery to database
-    func createDelivery(completion: @escaping(Delivery?) -> Void) {
-        APIManager.shared().call(key: "upsertDelivery", mutation: UpsertDeliveryMutation(userId: self.userId, orderStatus: "placed", resturantPlaceId: self.resturantPlaceId, deliveryBuildingPlaceId: self.deliveryBuildingPlaceId), completion: completion)
-        
-    }
-    
-    static func cancelDeliveryRequestForUser(_ user: User, completion: @escaping(Delivery?) -> Void) {
-        APIManager.shared().call(key: "upsertDelivery", mutation: UpsertDeliveryMutation(userId: user.id, orderStatus: "cancelled"), completion: completion)
-        
-    }
+    // MARK: - Database Delivery Methods
     
     static func getAllPlacedDeliveries(completion: @escaping([Delivery]?) -> Void) {
         APIManager.shared().call(key: "allDeliveries", query: AllDeliveriesQuery(), completion: completion)
     }
     
+    static func fetchCurrentFromDatabase(completion: @escaping(Delivery?) -> Void){
+        guard let currentUser = User.getCurrent() else { return }
+
+        APIManager.shared().call(key: "getUserDelivery", query: GetUserDeliveryQuery(userId: currentUser.id), completion: completion)
+    }
+    
+    static func createDelivery(userId: Int, orderStatus: String, resturantPlaceId: Int, deliveryBuildingPlaceId: Int, completion: @escaping(Delivery?) -> Void) {
+        APIManager.shared().call(key: "upsertDelivery", mutation: UpsertDeliveryMutation(userId: userId, orderStatus: orderStatus, resturantPlaceId: resturantPlaceId, deliveryBuildingPlaceId: deliveryBuildingPlaceId), completion: completion)
+    }
+    
+    static func cancelDelivery(deliveryId: Int, completion: @escaping(Delivery?) -> Void) {
+        APIManager.shared().call(key: "cancelDelivery", mutation: CancelDeliveryMutation(deliveryId: deliveryId), completion: completion)
+    }
+    
+    
+}
+
+extension Delivery : Equatable {
+    static func == (lhs: Delivery, rhs: Delivery) -> Bool {
+        return lhs.id == rhs.id
+    }
 }
 
 

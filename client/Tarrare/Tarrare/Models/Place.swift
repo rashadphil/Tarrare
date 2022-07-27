@@ -14,6 +14,7 @@ class Place: Codable {
     var id : Int = 0
     var name : String = ""
     var fullAddress: String = ""
+    var streetAddress: String = ""
     var state: String = ""
     var city: String = ""
     var zipcode: Int = 0
@@ -23,6 +24,7 @@ class Place: Codable {
         case id
         case name
         case fullAddress
+        case streetAddress
         case state
         case city
         case zipcode
@@ -34,6 +36,10 @@ class Place: Codable {
             let type = component.type
             if type == "locality" {
                 self.city = component.name
+            } else if type == "street_number" {
+                self.streetAddress += "\(component.name) "
+            } else if type == "route" {
+                self.streetAddress += component.name
             } else if type == "administrative_area_level_1" {
                 self.state = component.name
             } else if type == "postal_code" {
@@ -55,32 +61,9 @@ class Place: Codable {
         self.fullAddress = gmsPrediction.attributedSecondaryText?.string ?? ""
     }
     
-    init(_ name: String, fullAddress: String) {
-        self.name = name
-        self.fullAddress = fullAddress
-    }
-    
-    static func setCurrent(_ place: Place, writeToUserDefaults: Bool = false) {
-        if writeToUserDefaults {
-            if let data = try? JSONEncoder().encode(place) {
-                UserDefaults.standard.set(data, forKey: Constants.UserDefaults.currentPlace)
-                
-            }
-        }
-    }
-    
-    static func getCurrent() -> Place? {
-        let placeData = UserDefaults.standard.object(forKey: Constants.UserDefaults.currentPlace) as? Data
-        if let placeData = placeData {
-            let place = try? JSONDecoder().decode(Place.self, from:placeData)
-            return place
-        }
-        return nil
-    }
-    
     // send the place to database
     func createPlace(completion: @escaping(Place?) -> Void) {
-        APIManager.shared().call(key: "createPlace", mutation: CreatePlaceMutation(name: self.name, fullAddress: self.fullAddress, state: self.state, city: self.city, zipcode: self.zipcode, googlePlaceId: self.googlePlaceId), completion: completion)
+        APIManager.shared().call(key: "createPlace", mutation: CreatePlaceMutation(name: self.name, fullAddress: self.fullAddress, streetAddress: self.streetAddress, state: self.state, city: self.city, zipcode: self.zipcode, googlePlaceId: self.googlePlaceId), completion: completion)
     }
     
 }
