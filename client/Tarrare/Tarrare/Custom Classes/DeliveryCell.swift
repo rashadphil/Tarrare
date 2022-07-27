@@ -134,7 +134,7 @@ class DeliveryCell : UITableViewCell {
     
     @objc func didTapChatIcon(_ sender: Any) {
         if let delivery = delivery {
-            self.delegate.didTapChatIcon(tappedUser: delivery.user)
+            self.delegate.didTapChatIcon(tappedDelivery: delivery)
         }
     }
     
