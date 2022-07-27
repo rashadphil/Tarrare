@@ -22,14 +22,15 @@ model User {
   lastLogin        DateTime?   @default(now())
   delivering       Boolean     @default(false)
   profile          Profile?
-  orders           Order[]
-  deliveries       Delivery[]
   university       University? @relation(fields: [universityId], references: [id])
   universityId     Int?
   recievedMessages Message[]   @relation("RecieverOfMessage")
   sentMessages     Message[]   @relation("SenderOfMessage")
   convosOne        Convo[]     @relation("ConvoMemberOne")
   convosTwo        Convo[]     @relation("ConvoMemberTwo")
+
+  orders     Order[]
+  deliveries Delivery[]
 }
 
 model Profile {
@@ -61,6 +62,7 @@ model Order {
   resturantPlaceId        Int
   deliveryBuildingPlaceId Int
   dateCreated             DateTime         @default(now())
+  Match                   Match[]
 }
 
 model Delivery {
@@ -73,13 +75,14 @@ model Delivery {
   resturantPlaceId        Int
   deliveryBuildingPlaceId Int
   dateCreated             DateTime         @default(now())
+  Match                   Match[]
 }
 
 model Resturant {
-  place    Place      @relation(fields: [placeId], references: [id])
-  placeId  Int        @unique
-  Order    Order[]
-  Delivery Delivery[]
+  place      Place      @relation(fields: [placeId], references: [id])
+  placeId    Int        @unique
+  orders     Order[]
+  deliveries Delivery[]
 }
 
 model DeliveryBuilding {
@@ -93,6 +96,7 @@ model Place {
   id               Int                @id @default(autoincrement())
   name             String
   fullAddress      String             @db.VarChar(255)
+  streetAddress    String             @db.VarChar(255)
   state            String             @db.VarChar(255)
   city             String             @db.VarChar(255)
   zipcode          Int
@@ -100,6 +104,19 @@ model Place {
   University       University[]
   Resturant        Resturant[]
   DeliveryBuilding DeliveryBuilding[]
+}
+
+model Match {
+  id                Int     @id @default(autoincrement())
+  completed         Boolean
+  delivererAccepted Boolean @default(false)
+  ordererAccepted   Boolean @default(false)
+  orderId Int
+  order   Order @relation(fields: [orderId], references: [id])
+  deliveryId Int
+  delivery   Delivery @relation(fields: [deliveryId], references: [id])
+
+  @@unique([orderId, deliveryId])
 }
 
 // CHAT/MESSAGING TABLES

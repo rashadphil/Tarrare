@@ -1,5 +1,4 @@
-import { Place, Status } from "@prisma/client";
-import { Prisma, PrismaClient } from "@prisma/client";
+import { Delivery, Order, Place, Status } from "@prisma/client";
 import bcrypt from "bcrypt";
 import { context } from "./context";
 
@@ -76,8 +75,15 @@ const registerUser = async (
  */
 
 const createPlace = async (placeObj: any) => {
-  const { name, fullAddress, state, city, zipcode, googlePlaceId } =
-    placeObj;
+  const {
+    name,
+    fullAddress,
+    streetAddress,
+    state,
+    city,
+    zipcode,
+    googlePlaceId,
+  } = placeObj;
 
   const place = await context.prisma.place.findUnique({
     where: {
@@ -93,6 +99,7 @@ const createPlace = async (placeObj: any) => {
       data: {
         name,
         fullAddress,
+        streetAddress,
         state,
         city,
         zipcode,
@@ -135,6 +142,65 @@ const addDeliveryBuilding = async (placeId: number) => {
 /**
  * Orders/Deliveries
  */
+const upsertOrder = async (
+  userId: number,
+  orderStatus: string,
+  resturantPlaceId?: number | null,
+  deliveryBuildingPlaceId?: number | null
+) => {
+  let status = (<any>Status)[orderStatus];
+  // check if user already has an incomplete delivery request
+  const placedOrderRequest = await context.prisma.order.findFirst({
+    where: {
+      userId,
+      orderStatus: Status.placed,
+    },
+    select: {
+      id: true,
+    },
+  });
+
+  if (placedOrderRequest) {
+    // if incomplete delivery exists for this user, update orderStatus
+    const updatedOrder = await context.prisma.delivery.update({
+      where: {
+        id: placedOrderRequest.id,
+      },
+      data: {
+        orderStatus: status,
+      },
+      include: {
+        user: true,
+        resturant: true,
+        deliveryBuilding: true,
+      },
+    });
+    return updatedOrder;
+  } else {
+    if (resturantPlaceId && deliveryBuildingPlaceId) {
+      await addResturant(resturantPlaceId);
+      await addDeliveryBuilding(deliveryBuildingPlaceId);
+
+      const createdOrder = await context.prisma.order.create({
+        data: {
+          orderStatus: status,
+          userId,
+          resturantPlaceId,
+          deliveryBuildingPlaceId,
+        },
+        include: {
+          user: true,
+          resturant: true,
+          deliveryBuilding: true,
+        },
+      });
+      return createdOrder;
+    } else {
+      throw new Error("Invalid Order Request");
+    }
+  }
+};
+
 const upsertDelivery = async (
   userId: number,
   orderStatus: string,
@@ -232,16 +298,65 @@ const createMessage = async (
   return createdMessage;
 };
 
+// Matching Algorithm
+
+// given a delivery or order, check for matching order or delivery
+const checkForMatch = async (
+  object: Delivery | Order,
+  objectType: String
+) => {
+  const { orderStatus, deliveryBuildingPlaceId, resturantPlaceId } =
+    object;
+
+  if (orderStatus != "placed") return null;
+
+  if (objectType == "Delivery") {
+    const matchingOrder = await context.prisma.order.findFirst({
+      where: {
+        orderStatus: "placed",
+        deliveryBuildingPlaceId,
+        resturantPlaceId,
+      },
+    });
+    return matchingOrder;
+  } else if (objectType == "Order") {
+    const matchingDelivery = await context.prisma.delivery.findFirst({
+      where: {
+        orderStatus: "placed",
+        deliveryBuildingPlaceId,
+        resturantPlaceId,
+      },
+    });
+
+    return matchingDelivery;
+  }
+};
+
+const createMatch = async (order: Order, delivery: Delivery) => {
+  const createdMatch = await context.prisma.match.create({
+    data: {
+      orderId: order.id,
+      deliveryId: delivery.id,
+      delivererAccepted: false,
+      ordererAccepted: true,
+      completed: false,
+    },
+  });
+  return createdMatch;
+};
+
 const db = {
   loginUser,
   registerUser,
-  updateUser,
   addPlace,
   createPlace,
   addResturant,
   addDeliveryBuilding,
   upsertDelivery,
+  upsertOrder,
   createMessage,
+  checkForMatch,
+  createMatch,
 };
 
 export default db;
