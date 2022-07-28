@@ -6,6 +6,7 @@ mutation CreatePlace(
   $city: String!
   $zipcode: Int!
   $googlePlaceId: String!
+  $websiteUrl: String
 ) {
   createPlace(
     name: $name
@@ -15,6 +16,7 @@ mutation CreatePlace(
     city: $city
     zipcode: $zipcode
     googlePlaceId: $googlePlaceId
+    websiteUrl: $websiteUrl
   ) {
     ...PlaceInfo
   }

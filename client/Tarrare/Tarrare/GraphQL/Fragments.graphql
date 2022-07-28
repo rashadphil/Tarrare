@@ -7,7 +7,9 @@ fragment PlaceInfo on Place {
   city
   zipcode
   googlePlaceId
+  websiteUrl
 }
+
 fragment UserInfo on User {
   email
   id

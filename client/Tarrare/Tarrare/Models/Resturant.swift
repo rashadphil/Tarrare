@@ -27,7 +27,7 @@ class Resturant: Codable {
     }
 
     func setLogoForImageView(imageView: UIImageView) {
-        if let websiteURL = self.place.websiteURL {
+        if let websiteURL = self.place.websiteUrl {
             let logoLink = "https://logo.clearbit.com/\(websiteURL)"
             imageView.downloaded(from: logoLink)
         }

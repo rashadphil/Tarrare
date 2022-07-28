@@ -19,7 +19,7 @@ class Place: Codable {
     var city: String = ""
     var zipcode: Int = 0
     var googlePlaceId: String = ""
-    var websiteURL: String?
+    var websiteUrl: String?
     
     enum CodingKeys: String, CodingKey {
         case id
@@ -30,6 +30,7 @@ class Place: Codable {
         case city
         case zipcode
         case googlePlaceId
+        case websiteUrl
     }
     
     func setAddressComponents(_ addressComponents: [GMSAddressComponent]?) {
@@ -56,7 +57,7 @@ class Place: Codable {
         self.state = state
         self.city = city
         self.zipcode = zipcode
-        self.websiteURL = websiteURL
+        self.websiteUrl = websiteURL
     }
     
     init(_ gmsPlace: GMSPlace){
@@ -64,6 +65,11 @@ class Place: Codable {
         self.fullAddress = gmsPlace.formattedAddress!
         setAddressComponents(gmsPlace.addressComponents)
         self.googlePlaceId = gmsPlace.placeID!
+        
+        if let placeWebsite = gmsPlace.website {
+            let domain = placeWebsite.host
+            self.websiteUrl = domain
+        }
     }
     
     init(_ gmsPrediction: GMSAutocompletePrediction) {
@@ -73,7 +79,7 @@ class Place: Codable {
     
     // send the place to database
     func createPlace(completion: @escaping(Place?) -> Void) {
-        APIManager.shared().call(key: "createPlace", mutation: CreatePlaceMutation(name: self.name, fullAddress: self.fullAddress, streetAddress: self.streetAddress, state: self.state, city: self.city, zipcode: self.zipcode, googlePlaceId: self.googlePlaceId), completion: completion)
+        APIManager.shared().call(key: "createPlace", mutation: CreatePlaceMutation(name: self.name, fullAddress: self.fullAddress, streetAddress: self.streetAddress, state: self.state, city: self.city, zipcode: self.zipcode, googlePlaceId: self.googlePlaceId, websiteUrl: self.websiteUrl), completion: completion)
     }
     
 }
