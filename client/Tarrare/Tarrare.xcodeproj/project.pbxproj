@@ -35,6 +35,8 @@
 		1F2F45CF2892060500036D40 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1F2F45CE2892060400036D40 /* UIKit.framework */; };
 		1F2F45D12892065500036D40 /* GooglePlaces.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1F2F45D02892065500036D40 /* GooglePlaces.xcframework */; };
 		1F2F45D72892069400036D40 /* GooglePlaces.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 1F2F45D62892069400036D40 /* GooglePlaces.bundle */; };
+		1F2F45D928920A5F00036D40 /* OrderScreenRestaurantsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F2F45D828920A5F00036D40 /* OrderScreenRestaurantsViewController.swift */; };
+		1F2F45DB28920F7A00036D40 /* RestaurantCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F2F45DA28920F7900036D40 /* RestaurantCell.swift */; };
 		1F993F342885C8A200DD1A54 /* Apollo in Frameworks */ = {isa = PBXBuildFile; productRef = 1F993F332885C8A200DD1A54 /* Apollo */; };
 		1F993F362885C8A200DD1A54 /* ApolloWebSocket in Frameworks */ = {isa = PBXBuildFile; productRef = 1F993F352885C8A200DD1A54 /* ApolloWebSocket */; };
 		1F993F3A28860F4B00DD1A54 /* MessageKit in Frameworks */ = {isa = PBXBuildFile; productRef = 1F993F3928860F4B00DD1A54 /* MessageKit */; };
@@ -101,6 +103,8 @@
 		1F2F45CE2892060400036D40 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		1F2F45D02892065500036D40 /* GooglePlaces.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = GooglePlaces.xcframework; path = "../../../../Downloads/GooglePlaces-7.0.0-beta 3/GooglePlaces.xcframework"; sourceTree = "<group>"; };
 		1F2F45D62892069400036D40 /* GooglePlaces.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = GooglePlaces.bundle; path = "../../../../Downloads/GooglePlaces-7.0.0-beta 3/GooglePlaces.xcframework/ios-arm64_x86_64-simulator/GooglePlaces.framework/Resources/GooglePlaces.bundle"; sourceTree = "<group>"; };
+		1F2F45D828920A5F00036D40 /* OrderScreenRestaurantsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderScreenRestaurantsViewController.swift; sourceTree = "<group>"; };
+		1F2F45DA28920F7900036D40 /* RestaurantCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestaurantCell.swift; sourceTree = "<group>"; };
 		1F993F372885EF6900DD1A54 /* CreateMessage.graphql */ = {isa = PBXFileReference; lastKnownFileType = text; path = CreateMessage.graphql; sourceTree = "<group>"; };
 		1F993F3B2886195800DD1A54 /* Message.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Message.swift; sourceTree = "<group>"; };
 		1F993F3D2886205500DD1A54 /* OpenChatsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenChatsViewController.swift; sourceTree = "<group>"; };
@@ -193,6 +197,7 @@
 				1FB84001287C9BEF00E33667 /* PlaceCell.swift */,
 				1FB84013287F718B00E33667 /* DeliveryCell.swift */,
 				1F2F45A22891EDF500036D40 /* ConvoCell.swift */,
+				1F2F45DA28920F7900036D40 /* RestaurantCell.swift */,
 			);
 			path = "Custom Classes";
 			sourceTree = "<group>";
@@ -272,6 +277,7 @@
 				1FB84009287CFE8900E33667 /* OrderViewController.swift */,
 				1FB84015288096ED00E33667 /* IndividualChatViewController.swift */,
 				1F993F3D2886205500DD1A54 /* OpenChatsViewController.swift */,
+				1F2F45D828920A5F00036D40 /* OrderScreenRestaurantsViewController.swift */,
 			);
 			path = "View Controllers";
 			sourceTree = "<group>";
@@ -501,6 +507,7 @@
 				1FB8400E287E5E6A00E33667 /* Delivery.swift in Sources */,
 				1FB83FF82878FCBD00E33667 /* MapsAPI.swift in Sources */,
 				1F993F3E2886205500DD1A54 /* OpenChatsViewController.swift in Sources */,
+				1F2F45D928920A5F00036D40 /* OrderScreenRestaurantsViewController.swift in Sources */,
 				1FE95A1E2874F6D300A79C77 /* AppDelegate.swift in Sources */,
 				1F2F459F2891EDC000036D40 /* Order.swift in Sources */,
 				1F993F4328862A8100DD1A54 /* API.swift in Sources */,
@@ -512,6 +519,7 @@
 				1FE95A5B2878E99300A79C77 /* SelectLocationViewController.swift in Sources */,
 				1FE95A3828773D5C00A79C77 /* Extension.swift in Sources */,
 				1F2F45A12891EDCC00036D40 /* NewOfferViewController.swift in Sources */,
+				1F2F45DB28920F7A00036D40 /* RestaurantCell.swift in Sources */,
 				1F2F45A32891EDF500036D40 /* ConvoCell.swift in Sources */,
 				1FB8400A287CFE8900E33667 /* OrderViewController.swift in Sources */,
 				1FE95A362876418D00A79C77 /* LoginViewController.swift in Sources */,
