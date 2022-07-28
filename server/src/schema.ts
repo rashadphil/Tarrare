@@ -405,6 +405,21 @@ export const Query = queryType({
         });
       },
     });
+
+    t.nonNull.list.field("getActiveDeliveries", {
+      type: "Delivery",
+      args: {
+        restaurantPlaceId: nonNull(intArg()),
+      },
+      resolve: (_parent, args, context: Context) => {
+        return context.prisma.delivery.findMany({
+          where: {
+            orderStatus: Status.placed,
+            resturantPlaceId: args.restaurantPlaceId,
+          },
+        });
+      },
+    });
   },
 });
 
