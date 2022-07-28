@@ -77,3 +77,22 @@ extension UIImageView {
         downloaded(from: url, contentMode: mode)
     }
 }
+
+extension UIStackView {
+    func addHorizontalSeparator(color : UIColor) {
+        var i = self.arrangedSubviews.count - 1
+        while i > 0 {
+            let separator = createSeparator(color: color)
+            insertArrangedSubview(separator, at: i)
+            separator.widthAnchor.constraint(equalTo: self.widthAnchor, multiplier: 1.0).isActive = true
+            i -= 1
+        }
+    }
+    
+    private func createSeparator(color: UIColor) -> UIView {
+        let separator = UIView()
+        separator.heightAnchor.constraint(equalToConstant: 1).isActive = true
+        separator.backgroundColor = color
+        return separator
+    }
+}

@@ -46,6 +46,17 @@ class Delivery: Codable {
         }
     }
     
+    init(user: User, restaurant: Resturant, deliveryBuilding: DeliveryBuilding){
+      self.id = 0 
+      self.orderStatus = ""
+      self.user = user
+      self.userId = 0 
+      self.resturant = restaurant
+      self.resturantPlaceId = 0
+      self.deliveryBuilding = deliveryBuilding
+      self.deliveryBuildingPlaceId = 0
+    }
+    
     // MARK: - Database Delivery Methods
     
     static func getAllPlacedDeliveries(completion: @escaping([Delivery]?) -> Void) {
