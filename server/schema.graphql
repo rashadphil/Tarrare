@@ -93,6 +93,7 @@ type Place {
 type Query {
   allDeliveries: [Delivery]!
   allUsers: [User!]!
+  getAllActiveRestaurants: [Resturant]!
   getConversation(recieverId: Int!, senderId: Int!): [Message]!
   getUserConversations(currentUserId: Int!): [Convo]!
   getUserDelivery(userId: Int!): Delivery

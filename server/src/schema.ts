@@ -390,6 +390,20 @@ export const Query = queryType({
         });
       },
     });
+
+    // all restaurants that currently have deliverers
+    t.nonNull.list.field("getAllActiveRestaurants", {
+      type: "Resturant",
+      resolve: (_parent, _args, context: Context) => {
+        return context.prisma.resturant.findMany({
+          where: {
+            deliveries: {
+              some: { orderStatus: { equals: Status.placed } },
+            },
+          },
+        });
+      },
+    });
   },
 });
 
