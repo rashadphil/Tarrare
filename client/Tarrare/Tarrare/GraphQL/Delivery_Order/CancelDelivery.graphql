@@ -1,0 +1,5 @@
+mutation CancelDelivery($deliveryId: Int!) {
+  cancelDelivery(deliveryId: $deliveryId) {
+    ...DeliveryInfo
+  }
+}

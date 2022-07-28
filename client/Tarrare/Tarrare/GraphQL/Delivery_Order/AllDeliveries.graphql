@@ -1,0 +1,5 @@
+query AllDeliveries {
+  allDeliveries {
+    ...DeliveryInfo
+  }
+}

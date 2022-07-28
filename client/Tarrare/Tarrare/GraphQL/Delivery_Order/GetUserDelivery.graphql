@@ -1,0 +1,5 @@
+query GetUserDelivery($userId: Int!) {
+  getUserDelivery(userId: $userId) {
+    ...DeliveryInfo
+  }
+}

@@ -1,0 +1,15 @@
+mutation UpsertDelivery(
+  $userId: Int!
+  $orderStatus: String!
+  $resturantPlaceId: Int!
+  $deliveryBuildingPlaceId: Int!
+) {
+  upsertDelivery(
+    userId: $userId
+    orderStatus: $orderStatus
+    resturantPlaceId: $resturantPlaceId
+    deliveryBuildingPlaceId: $deliveryBuildingPlaceId
+  ) {
+    ...DeliveryInfo
+  }
+}

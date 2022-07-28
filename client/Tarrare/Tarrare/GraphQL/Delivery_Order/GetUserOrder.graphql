@@ -1,0 +1,5 @@
+query GetUserOrder($userId: Int!) {
+  getUserOrder(userId: $userId) {
+    ...OrderInfo
+  }
+}

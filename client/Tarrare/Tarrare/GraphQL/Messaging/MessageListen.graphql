@@ -1,0 +1,5 @@
+subscription MessageListen($recieverId: Int!) {
+  newMessage(recieverId: $recieverId) {
+    ...MessageInfo
+  }
+}

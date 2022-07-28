@@ -1,0 +1,5 @@
+mutation AcceptMatch($matchId: Int!) {
+  acceptMatch(matchId: $matchId) {
+    ...MatchInfo
+  }
+}

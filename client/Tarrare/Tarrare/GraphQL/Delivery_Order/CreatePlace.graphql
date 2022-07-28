@@ -1,0 +1,21 @@
+mutation CreatePlace(
+  $name: String!
+  $fullAddress: String!
+  $streetAddress: String!
+  $state: String!
+  $city: String!
+  $zipcode: Int!
+  $googlePlaceId: String!
+) {
+  createPlace(
+    name: $name
+    fullAddress: $fullAddress
+    streetAddress: $streetAddress
+    state: $state
+    city: $city
+    zipcode: $zipcode
+    googlePlaceId: $googlePlaceId
+  ) {
+    ...PlaceInfo
+  }
+}

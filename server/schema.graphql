@@ -32,6 +32,17 @@ type DeliveryBuilding {
   placeId: Int!
 }
 
+type Match {
+  completed: Boolean!
+  delivererAccepted: Boolean!
+  delivery: Delivery
+  deliveryId: Int!
+  id: Int!
+  order: Order
+  orderId: Int!
+  ordererAccepted: Boolean!
+}
+
 type Message {
   convo: Convo
   convoId: Int!
@@ -45,12 +56,27 @@ type Message {
 }
 
 type Mutation {
+  acceptMatch(matchId: Int!): Match
+  cancelDelivery(deliveryId: Int!): Delivery
+  cancelOrder(orderId: Int!): Order
   createMessage(recieverId: Int!, senderId: Int!, text: String!): Message
-  createPlace(city: String!, fullAddress: String!, googlePlaceId: String!, name: String!, state: String!, zipcode: Int!): Place
+  createPlace(city: String!, fullAddress: String!, googlePlaceId: String!, name: String!, state: String!, streetAddress: String!, zipcode: Int!): Place
+  declineMatch(matchId: Int!): Match
   login(email: String!, password: String!): User
   register(email: String!, firstName: String!, lastName: String!, password: String!): User
-  toggleUserDeliveryStatus(delivering: Boolean!, id: Int!): User
-  upsertDelivery(deliveryBuildingPlaceId: Int, orderStatus: String!, resturantPlaceId: Int, userId: Int!): Delivery
+  upsertDelivery(deliveryBuildingPlaceId: Int!, orderStatus: String!, resturantPlaceId: Int!, userId: Int!): Delivery
+  upsertOrder(deliveryBuildingPlaceId: Int!, orderStatus: String!, resturantPlaceId: Int!, userId: Int!): Order
+}
+
+type Order {
+  deliveryBuilding: DeliveryBuilding
+  deliveryBuildingPlaceId: Int!
+  id: Int!
+  orderStatus: String!
+  resturant: Resturant
+  resturantPlaceId: Int!
+  user: User
+  userId: Int!
 }
 
 type Place {
@@ -60,6 +86,7 @@ type Place {
   id: Int!
   name: String!
   state: String!
+  streetAddress: String!
   zipcode: Int!
 }
 
@@ -68,6 +95,8 @@ type Query {
   allUsers: [User!]!
   getConversation(recieverId: Int!, senderId: Int!): [Message]!
   getUserConversations(currentUserId: Int!): [Convo]!
+  getUserDelivery(userId: Int!): Delivery
+  getUserOrder(userId: Int!): Order
 }
 
 type Resturant {
@@ -76,6 +105,8 @@ type Resturant {
 }
 
 type Subscription {
+  matchUpdate: Match
+  newMatch: Match
   newMessage(recieverId: Int!): Message
 }
 

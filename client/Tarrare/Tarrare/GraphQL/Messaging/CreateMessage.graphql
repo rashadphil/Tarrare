@@ -1,0 +1,5 @@
+mutation CreateMessage($text: String!, $senderId: Int!, $recieverId: Int!) {
+  createMessage(text: $text, senderId: $senderId, recieverId: $recieverId) {
+    ...MessageInfo
+  }
+}

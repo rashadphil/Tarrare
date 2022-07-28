@@ -1,0 +1,5 @@
+query GetConversation($senderId: Int!, $recieverId: Int!) {
+  getConversation(senderId: $senderId, recieverId: $recieverId) {
+    ...MessageInfo
+  }
+}

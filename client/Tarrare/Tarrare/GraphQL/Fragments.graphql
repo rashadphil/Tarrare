@@ -1,0 +1,77 @@
+fragment PlaceInfo on Place {
+  id
+  name
+  fullAddress
+  streetAddress
+  state
+  city
+  zipcode
+  googlePlaceId
+}
+fragment UserInfo on User {
+  email
+  id
+  firstName
+  lastName
+  delivering
+}
+
+fragment OrderInfo on Order {
+  deliveryBuilding {
+    placeId
+    place {
+      ...PlaceInfo
+    }
+  }
+  deliveryBuildingPlaceId
+  id
+  orderStatus
+  resturant {
+    placeId
+    place {
+      ...PlaceInfo
+    }
+  }
+  resturantPlaceId
+  user {
+    ...UserInfo
+  }
+  userId
+}
+
+fragment DeliveryInfo on Delivery {
+  deliveryBuilding {
+    placeId
+    place {
+      ...PlaceInfo
+    }
+  }
+  deliveryBuildingPlaceId
+  id
+  orderStatus
+  resturant {
+    placeId
+    place {
+      ...PlaceInfo
+    }
+  }
+  resturantPlaceId
+  user {
+    ...UserInfo
+  }
+  userId
+}
+fragment MatchInfo on Match {
+  completed
+  delivererAccepted
+  delivery {
+    ...DeliveryInfo
+  }
+  deliveryId
+  id
+  order {
+    ...OrderInfo
+  }
+  ordererAccepted
+  orderId
+}

@@ -1,0 +1,5 @@
+mutation DeclineMatch($matchId: Int!) {
+  declineMatch(matchId: $matchId) {
+    ...MatchInfo
+  }
+}

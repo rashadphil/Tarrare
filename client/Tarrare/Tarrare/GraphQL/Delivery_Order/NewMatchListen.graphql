@@ -1,0 +1,5 @@
+subscription NewMatchListen {
+  newMatch {
+    ...MatchInfo
+  }
+}
