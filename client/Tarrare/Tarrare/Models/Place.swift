@@ -19,6 +19,7 @@ class Place: Codable {
     var city: String = ""
     var zipcode: Int = 0
     var googlePlaceId: String = ""
+    var websiteURL: String?
     
     enum CodingKeys: String, CodingKey {
         case id
@@ -47,6 +48,15 @@ class Place: Codable {
             }
         }
         
+    }
+    
+    init(name: String, streetAddress: String, state: String, city: String, zipcode: Int, websiteURL: String) {
+        self.name = name
+        self.streetAddress = streetAddress
+        self.state = state
+        self.city = city
+        self.zipcode = zipcode
+        self.websiteURL = websiteURL
     }
     
     init(_ gmsPlace: GMSPlace){

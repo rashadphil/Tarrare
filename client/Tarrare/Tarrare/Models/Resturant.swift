@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import UIKit
 
 class Resturant: Codable {
     let place : Place
@@ -16,5 +17,13 @@ class Resturant: Codable {
     
     init(_ place: Place){
         self.place = place
+    }
+
+    func setLogoForImageView(imageView: UIImageView) {
+        if let websiteURL = self.place.websiteURL {
+            let logoLink = "https://logo.clearbit.com/\(websiteURL)"
+            imageView.downloaded(from: logoLink)
+        }
+        
     }
 }
