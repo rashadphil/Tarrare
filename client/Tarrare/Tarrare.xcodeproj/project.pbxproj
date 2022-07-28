@@ -56,6 +56,7 @@
 		1F2F46012892FF8D00036D40 /* CancelDelivery.graphql in Resources */ = {isa = PBXBuildFile; fileRef = 1F2F45EF2892FF8D00036D40 /* CancelDelivery.graphql */; };
 		1F2F46022892FF8D00036D40 /* Fragments.graphql in Resources */ = {isa = PBXBuildFile; fileRef = 1F2F45F02892FF8D00036D40 /* Fragments.graphql */; };
 		1F634DFA289301E300D027AD /* GetAllActiveRestaurants.graphql in Resources */ = {isa = PBXBuildFile; fileRef = 1F634DF9289301E300D027AD /* GetAllActiveRestaurants.graphql */; };
+		1F634DFC2893181900D027AD /* RestaurantDeliveriesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F634DFB2893181900D027AD /* RestaurantDeliveriesViewController.swift */; };
 		1F993F342885C8A200DD1A54 /* Apollo in Frameworks */ = {isa = PBXBuildFile; productRef = 1F993F332885C8A200DD1A54 /* Apollo */; };
 		1F993F362885C8A200DD1A54 /* ApolloWebSocket in Frameworks */ = {isa = PBXBuildFile; productRef = 1F993F352885C8A200DD1A54 /* ApolloWebSocket */; };
 		1F993F3A28860F4B00DD1A54 /* MessageKit in Frameworks */ = {isa = PBXBuildFile; productRef = 1F993F3928860F4B00DD1A54 /* MessageKit */; };
@@ -143,6 +144,7 @@
 		1F2F45EF2892FF8D00036D40 /* CancelDelivery.graphql */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = CancelDelivery.graphql; sourceTree = "<group>"; };
 		1F2F45F02892FF8D00036D40 /* Fragments.graphql */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Fragments.graphql; sourceTree = "<group>"; };
 		1F634DF9289301E300D027AD /* GetAllActiveRestaurants.graphql */ = {isa = PBXFileReference; lastKnownFileType = text; path = GetAllActiveRestaurants.graphql; sourceTree = "<group>"; };
+		1F634DFB2893181900D027AD /* RestaurantDeliveriesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestaurantDeliveriesViewController.swift; sourceTree = "<group>"; };
 		1F993F3B2886195800DD1A54 /* Message.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Message.swift; sourceTree = "<group>"; };
 		1F993F3D2886205500DD1A54 /* OpenChatsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenChatsViewController.swift; sourceTree = "<group>"; };
 		1F993F402886285100DD1A54 /* schema.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; name = schema.json; path = Tarrare/schema.json; sourceTree = SOURCE_ROOT; };
@@ -341,6 +343,7 @@
 				1FB84015288096ED00E33667 /* IndividualChatViewController.swift */,
 				1F993F3D2886205500DD1A54 /* OpenChatsViewController.swift */,
 				1F2F45D828920A5F00036D40 /* OrderScreenRestaurantsViewController.swift */,
+				1F634DFB2893181900D027AD /* RestaurantDeliveriesViewController.swift */,
 			);
 			path = "View Controllers";
 			sourceTree = "<group>";
@@ -585,6 +588,7 @@
 				1FB83FFE287C89F200E33667 /* LocationUILabel.swift in Sources */,
 				1F2F459B2891ED7900036D40 /* Conversation.swift in Sources */,
 				1F2F459D2891EDA000036D40 /* AppLoadingViewController.swift in Sources */,
+				1F634DFC2893181900D027AD /* RestaurantDeliveriesViewController.swift in Sources */,
 				1FE95A4E2878AFC500A79C77 /* Constants.swift in Sources */,
 				1FB8400E287E5E6A00E33667 /* Delivery.swift in Sources */,
 				1FB83FF82878FCBD00E33667 /* MapsAPI.swift in Sources */,
