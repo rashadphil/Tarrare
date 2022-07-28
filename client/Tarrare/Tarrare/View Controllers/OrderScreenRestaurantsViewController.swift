@@ -92,15 +92,16 @@ class OrderScreenRestaurantsViewController: UIViewController, UITableViewDelegat
     }
     
     func fetchRestaurants() {
-        // TODO (rashadphil) : retrieve all restaurants that currently have deliverers
-        let mockRestaurant1 = Resturant(Place(name: "Chick-fil-A", streetAddress: "503 W Martin Luther King Jr Blvd", state: "TX", city: "Austin", zipcode: 78701, websiteURL: "chick-fil-a.com"))
-        let mockRestaurant2 = Resturant(Place(name: "Chipotle", streetAddress: "2230 Guadalupe St #32", state: "TX", city: "Austin", zipcode: 78705, websiteURL: "chipotle.com"))
-        let mockRestaurant3 = Resturant(Place(name: "Panda Express", streetAddress: "22316 Guadalupe St Ste B", state: "TX", city: "Austin", zipcode: 78705, websiteURL: "pandaexpress.com"))
-        arrayOfRestaurants = [mockRestaurant1, mockRestaurant2, mockRestaurant3]
-        restaurantTableView.reloadData()
+        Resturant.getAllActiveRestaurants(completion: {restaurants in
+            if let restaurants = restaurants {
+                self.arrayOfRestaurants = restaurants
+                self.refreshControl.endRefreshing()
+                self.restaurantTableView.reloadData()
+            }
+        })
     }
-    
 }
+
 extension OrderScreenRestaurantsViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return arrayOfRestaurants.count
