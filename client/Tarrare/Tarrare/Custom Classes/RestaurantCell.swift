@@ -42,7 +42,7 @@ class RestaurantCell : UITableViewCell {
         self.logoImageView.anchor(top: contentView.topAnchor, left: contentView.leftAnchor, bottom: contentView.bottomAnchor, right: nil, paddingTop: 10, paddingLeft: 10, paddingBottom: 10, paddingRight: 10, width: 60, height: 60, enableInsets: false)
         self.nameLabel.anchor(top: contentView.topAnchor, left: self.logoImageView.rightAnchor, bottom: nil, right: contentView.rightAnchor, paddingTop: 8, paddingLeft: 8, paddingBottom: 8, paddingRight: 0, width: 0, height: 0, enableInsets: false)
         
-        self.addressView.anchor(top: self.nameLabel.bottomAnchor, left: self.logoImageView.rightAnchor, bottom: nil, right: nil, paddingTop: 5, paddingLeft: 8, paddingBottom: 0, paddingRight: 10, width: cellWidth, height: 0, enableInsets: false)
+        self.addressView.anchor(top: self.nameLabel.bottomAnchor, left: self.logoImageView.rightAnchor, bottom: nil, right: contentView.rightAnchor, paddingTop: 5, paddingLeft: 8, paddingBottom: 0, paddingRight: 10, width: 0, height: 0, enableInsets: false)
         
     }
     

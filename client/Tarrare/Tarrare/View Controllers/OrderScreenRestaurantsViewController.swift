@@ -100,6 +100,12 @@ class OrderScreenRestaurantsViewController: UIViewController, UITableViewDelegat
             }
         })
     }
+    
+    func presentDeliverersForRestaurant(restaurant: Resturant) {
+        let restaurantDeliveriesVC = RestaurantDeliveriesViewController()
+        restaurantDeliveriesVC.restaurant = restaurant
+        self.navigationController?.show(restaurantDeliveriesVC, sender: nil)
+    }
 }
 
 extension OrderScreenRestaurantsViewController: UITableViewDataSource {
@@ -113,6 +119,11 @@ extension OrderScreenRestaurantsViewController: UITableViewDataSource {
         cell.restaurant = currentRestaurant
         return cell
         
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let selectedRestaurant = arrayOfRestaurants[indexPath.row]
+        self.presentDeliverersForRestaurant(restaurant: selectedRestaurant)
     }
 }
 
