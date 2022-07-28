@@ -1,0 +1,8 @@
+query GetAllActiveRestaurants {
+  getAllActiveRestaurants {
+    placeId
+    place {
+    ...PlaceInfo
+    }
+  }
+}
