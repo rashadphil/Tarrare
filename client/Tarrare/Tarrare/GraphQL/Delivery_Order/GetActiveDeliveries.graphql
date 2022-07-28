@@ -1,0 +1,5 @@
+query GetActiveDeliveries($restaurantPlaceId: Int!) {
+  getActiveDeliveries(restaurantPlaceId: $restaurantPlaceId) {
+    ...DeliveryInfo
+  }
+}

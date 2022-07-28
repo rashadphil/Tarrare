@@ -59,6 +59,10 @@ class Delivery: Codable {
     
     // MARK: - Database Delivery Methods
     
+    static func getActiveDeliveriesForRestaurant(restaurant: Resturant, completion: @escaping([Delivery]?) -> Void) {
+        APIManager.shared().call(key: "getActiveDeliveries", query: GetActiveDeliveriesQuery(restaurantPlaceId: restaurant.placeId), completion: completion)
+    }
+    
     static func getAllPlacedDeliveries(completion: @escaping([Delivery]?) -> Void) {
         APIManager.shared().call(key: "allDeliveries", query: AllDeliveriesQuery(), completion: completion)
     }

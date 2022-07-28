@@ -57,6 +57,7 @@
 		1F2F46022892FF8D00036D40 /* Fragments.graphql in Resources */ = {isa = PBXBuildFile; fileRef = 1F2F45F02892FF8D00036D40 /* Fragments.graphql */; };
 		1F634DFA289301E300D027AD /* GetAllActiveRestaurants.graphql in Resources */ = {isa = PBXBuildFile; fileRef = 1F634DF9289301E300D027AD /* GetAllActiveRestaurants.graphql */; };
 		1F634DFC2893181900D027AD /* RestaurantDeliveriesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F634DFB2893181900D027AD /* RestaurantDeliveriesViewController.swift */; };
+		1F634DFE28934B2300D027AD /* GetActiveDeliveries.graphql in Resources */ = {isa = PBXBuildFile; fileRef = 1F634DFD28934B2300D027AD /* GetActiveDeliveries.graphql */; };
 		1F993F342885C8A200DD1A54 /* Apollo in Frameworks */ = {isa = PBXBuildFile; productRef = 1F993F332885C8A200DD1A54 /* Apollo */; };
 		1F993F362885C8A200DD1A54 /* ApolloWebSocket in Frameworks */ = {isa = PBXBuildFile; productRef = 1F993F352885C8A200DD1A54 /* ApolloWebSocket */; };
 		1F993F3A28860F4B00DD1A54 /* MessageKit in Frameworks */ = {isa = PBXBuildFile; productRef = 1F993F3928860F4B00DD1A54 /* MessageKit */; };
@@ -145,6 +146,7 @@
 		1F2F45F02892FF8D00036D40 /* Fragments.graphql */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Fragments.graphql; sourceTree = "<group>"; };
 		1F634DF9289301E300D027AD /* GetAllActiveRestaurants.graphql */ = {isa = PBXFileReference; lastKnownFileType = text; path = GetAllActiveRestaurants.graphql; sourceTree = "<group>"; };
 		1F634DFB2893181900D027AD /* RestaurantDeliveriesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestaurantDeliveriesViewController.swift; sourceTree = "<group>"; };
+		1F634DFD28934B2300D027AD /* GetActiveDeliveries.graphql */ = {isa = PBXFileReference; lastKnownFileType = text; path = GetActiveDeliveries.graphql; sourceTree = "<group>"; };
 		1F993F3B2886195800DD1A54 /* Message.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Message.swift; sourceTree = "<group>"; };
 		1F993F3D2886205500DD1A54 /* OpenChatsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenChatsViewController.swift; sourceTree = "<group>"; };
 		1F993F402886285100DD1A54 /* schema.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; name = schema.json; path = Tarrare/schema.json; sourceTree = SOURCE_ROOT; };
@@ -255,6 +257,7 @@
 				1F2F45EE2892FF8D00036D40 /* CreatePlace.graphql */,
 				1F2F45EF2892FF8D00036D40 /* CancelDelivery.graphql */,
 				1F634DF9289301E300D027AD /* GetAllActiveRestaurants.graphql */,
+				1F634DFD28934B2300D027AD /* GetActiveDeliveries.graphql */,
 			);
 			path = Delivery_Order;
 			sourceTree = "<group>";
@@ -499,6 +502,7 @@
 				1F2F45F12892FF8D00036D40 /* CreateMessage.graphql in Resources */,
 				1FE95A4C2878A70500A79C77 /* GoogleService-Info.plist in Resources */,
 				1F2F45F92892FF8D00036D40 /* AllDeliveries.graphql in Resources */,
+				1F634DFE28934B2300D027AD /* GetActiveDeliveries.graphql in Resources */,
 				1F2F45FA2892FF8D00036D40 /* GetUserDelivery.graphql in Resources */,
 				1F2F45F62892FF8D00036D40 /* RegisterUser.graphql in Resources */,
 				1F2F45FE2892FF8D00036D40 /* CancelOrder.graphql in Resources */,
