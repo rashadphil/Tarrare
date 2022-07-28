@@ -51,6 +51,7 @@ const Place = objectType({
     t.nonNull.string("city");
     t.nonNull.int("zipcode");
     t.nonNull.string("googlePlaceId");
+    t.nullable.string("websiteUrl");
   },
 });
 
@@ -542,6 +543,7 @@ export const Mutation = mutationType({
         city: nonNull(stringArg()),
         zipcode: nonNull(intArg()),
         googlePlaceId: nonNull(stringArg()),
+        websiteUrl: nullable(stringArg()),
       },
       resolve: async (
         _parent,
@@ -553,6 +555,7 @@ export const Mutation = mutationType({
           city,
           zipcode,
           googlePlaceId,
+          websiteUrl
         }
       ) => {
         return await context.db.createPlace({
@@ -563,6 +566,7 @@ export const Mutation = mutationType({
           city,
           zipcode,
           googlePlaceId,
+          websiteUrl
         });
       },
     });

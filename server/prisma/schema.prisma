@@ -101,6 +101,7 @@ model Place {
   city             String             @db.VarChar(255)
   zipcode          Int
   googlePlaceId    String             @unique
+  websiteUrl       String?
   University       University[]
   Resturant        Resturant[]
   DeliveryBuilding DeliveryBuilding[]
