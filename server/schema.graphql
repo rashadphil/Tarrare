@@ -108,6 +108,7 @@ type Resturant {
 }
 
 type Subscription {
+  cancelledOrder: Order
   matchUpdate: Match
   newMatch: Match
   newMessage(recieverId: Int!): Message

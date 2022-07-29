@@ -62,7 +62,7 @@ model Order {
   resturantPlaceId        Int
   deliveryBuildingPlaceId Int
   dateCreated             DateTime         @default(now())
-  Match                   Match[]
+  matches                 Match[]
 }
 
 model Delivery {
@@ -75,7 +75,7 @@ model Delivery {
   resturantPlaceId        Int
   deliveryBuildingPlaceId Int
   dateCreated             DateTime         @default(now())
-  Match                   Match[]
+  matches                 Match[]
 }
 
 model Resturant {
