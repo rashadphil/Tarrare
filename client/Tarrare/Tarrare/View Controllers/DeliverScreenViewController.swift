@@ -9,12 +9,22 @@ import Foundation
 import UIKit
 
 class DeliverScreenViewController: UIViewController {
+    public var editingLocationComponent : LocationComponentView?
     var delivery : Delivery? {
         didSet {
             guard let delivery = delivery else { return }
 
             restaurantComponentView.place = delivery.resturant.place
             deliveryLocationComponentView.place = delivery.deliveryBuilding.place
+            
+            if (delivery.orderStatus == "placed") {
+                toggleDeliveryStatusButton.backgroundColor = UIColor(named: "DarkGreen")
+                toggleDeliveryStatusButton.setTitle("Delivering", for: .normal)
+            } else {
+                toggleDeliveryStatusButton.backgroundColor = UIColor(named: "DarkRed")
+                toggleDeliveryStatusButton.setTitle("Not Delivering", for: .normal)
+            }
+            
         }
     }
     
@@ -33,6 +43,11 @@ class DeliverScreenViewController: UIViewController {
         
         self.deliveryBuildingInfoStackView.addArrangedSubview(self.deliveryLocationLabel)
         self.deliveryBuildingInfoStackView.addArrangedSubview(self.deliveryLocationComponentView)
+        
+        self.restaurantComponentView.parentVC = self
+        self.deliveryLocationComponentView.parentVC = self
+        
+        self.addDeliveryButtonGesture()
     }
     
     override func viewDidLayoutSubviews() {
@@ -112,9 +127,47 @@ class DeliverScreenViewController: UIViewController {
         return button
     }()
     
+    func createDelivery() {
+        guard let currentUser = User.getCurrent() else { return }
+        guard let restaurant = restaurantComponentView.place else { return }
+        guard let deliveryBuilding = deliveryLocationComponentView.place else { return }
+        
+        Delivery.createDelivery(userId: currentUser.id, orderStatus: "placed", resturantPlaceId: restaurant.id, deliveryBuildingPlaceId: deliveryBuilding.id, completion: {createdDelivery in
+            self.delivery = createdDelivery
+        })
+    }
+    
+    func cancelDelivery() {
+        guard let delivery = delivery else { return }
+
+        Delivery.cancelDelivery(deliveryId: delivery.id, completion: {cancelledDelivery in
+            self.delivery = cancelledDelivery
+        })
+    }
+    
+    @objc func didTapToggleDeliveryButton(_ sender: Any) {
+        if self.delivery == nil || self.delivery!.orderStatus == "cancelled" {
+            self.createDelivery()
+        } else {
+            self.cancelDelivery()
+        }
+    }
+    
+    func addDeliveryButtonGesture() {
+        self.toggleDeliveryStatusButton.addTarget(self, action: #selector(didTapToggleDeliveryButton(_:)), for: .touchUpInside)
+    }
+    
+}
+
+extension DeliverScreenViewController : SelectLocationViewDelegate {
+    func sendSelectedPlace(place: Place) {
+        guard let editingLocationComponent = self.editingLocationComponent else { return }
+        editingLocationComponent.place = place
+    }
 }
 
 class LocationComponentView : UIView {
+    public var parentVC : DeliverScreenViewController?
     public var place : Place? {
         didSet {
             guard let place = place else { return }
@@ -151,6 +204,7 @@ class LocationComponentView : UIView {
         self.editButtonView.addSubview(editButton)
         
         self.setupLayout()
+        self.addEditButtonGesture()
     }
     
     private func setupLayout() {
@@ -198,12 +252,12 @@ class LocationComponentView : UIView {
         return label
     }()
     
-    private let editButtonView : UIView = {
+    let editButtonView : UIView = {
         let view = UIView()
         return view
     }()
     
-    private let editButton : UIButton = {
+    let editButton : UIButton = {
         let button = UIButton()
         button.setTitle("Edit", for: .normal)
         button.setTitleColor(.white, for: .normal)
@@ -220,4 +274,20 @@ class LocationComponentView : UIView {
         
         return button
     }()
+    
+    // MARK: - LocationComponent Gestures/Actions
+    
+    @objc func didTapEditButton(_ sender: Any) {
+        guard let parentVC = parentVC else { return }
+        
+        let selectLocationVC = SelectLocationViewController()
+        selectLocationVC.delegate = parentVC
+        
+        parentVC.editingLocationComponent = self
+        parentVC.present(selectLocationVC, animated: true)
+    }
+    
+    func addEditButtonGesture() {
+        editButton.addTarget(self, action: #selector(didTapEditButton(_:)), for: .touchUpInside)
+    }
 }
