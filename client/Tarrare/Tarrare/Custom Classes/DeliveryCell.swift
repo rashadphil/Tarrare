@@ -9,7 +9,7 @@ import Foundation
 import UIKit
 
 protocol DeliveryCellProtocol {
-    func didTapChatIcon(tappedDelivery: Delivery)
+    func didTapRequestButton(tappedDelivery: Delivery)
 }
 
 class DeliveryCell : UITableViewCell {
@@ -20,10 +20,12 @@ class DeliveryCell : UITableViewCell {
             deliveryPlaceNameLabel.text = delivery.deliveryBuilding.place.name
         }
     }
+    var delegate : DeliveryCellProtocol!
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         self.backgroundColor = .white
+        self.addRequestButtonGesture()
         
         contentView.addSubview(self.containerStackView)
         contentView.addSubview(self.requestButtonView)
@@ -138,6 +140,18 @@ class DeliveryCell : UITableViewCell {
         button.tintColor = .white
         return button
     }()
+    
+    // MARK: - Actions/Gestures
+    
+    @objc func didTapRequestButton(_ sender: UIButton) {
+        if let delivery = delivery {
+            self.delegate.didTapRequestButton(tappedDelivery: delivery)
+        }
+    }
+    
+    func addRequestButtonGesture() {
+        self.requestButton.addTarget(self, action: #selector(didTapRequestButton(_:)), for: .touchUpInside)
+    }
     
     required init?(coder aDecoder: NSCoder) {
      fatalError("init(coder:) has not been implemented")

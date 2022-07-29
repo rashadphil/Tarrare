@@ -117,9 +117,24 @@ extension RestaurantDeliveriesViewController: UITableViewDataSource {
         let cell = tableView.dequeueReusableCell(withIdentifier: "DeliveryCell", for: indexPath) as! DeliveryCell
         let currentDelivery = arrayOfDeliveries[indexPath.row]
         cell.delivery = currentDelivery
+        cell.delegate = self
         return cell
         
     }
+}
+
+extension RestaurantDeliveriesViewController : DeliveryCellProtocol {
+    func didTapRequestButton(tappedDelivery: Delivery) {
+        
+        guard let currentUser = User.getCurrent() else { return }
+        
+        Order.createOrder(userId: currentUser.id, resturantPlaceId: tappedDelivery.resturantPlaceId, deliveryBuildingPlaceId: tappedDelivery.deliveryBuildingPlaceId, completion: {createdOrder in
+            
+            // TODO (rashadphil) : present a pending match acceptance view controller
+            
+        })
+    }
+    
 }
 
 
