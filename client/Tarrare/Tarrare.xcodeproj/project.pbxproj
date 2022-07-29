@@ -61,6 +61,8 @@
 		1F634E0028935E0F00D027AD /* PendingMatchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F634DFF28935E0F00D027AD /* PendingMatchViewController.swift */; };
 		1F634E04289373A200D027AD /* LoadingCircleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F634E03289373A200D027AD /* LoadingCircleView.swift */; };
 		1F634E0628945CB200D027AD /* DeliverScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F634E0528945CB200D027AD /* DeliverScreenViewController.swift */; };
+		1F634E082894899300D027AD /* DeliverTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F634E072894899300D027AD /* DeliverTabBarController.swift */; };
+		1F634E0A28948D3900D027AD /* OrderTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F634E0928948D3900D027AD /* OrderTabBarController.swift */; };
 		1F993F342885C8A200DD1A54 /* Apollo in Frameworks */ = {isa = PBXBuildFile; productRef = 1F993F332885C8A200DD1A54 /* Apollo */; };
 		1F993F362885C8A200DD1A54 /* ApolloWebSocket in Frameworks */ = {isa = PBXBuildFile; productRef = 1F993F352885C8A200DD1A54 /* ApolloWebSocket */; };
 		1F993F3A28860F4B00DD1A54 /* MessageKit in Frameworks */ = {isa = PBXBuildFile; productRef = 1F993F3928860F4B00DD1A54 /* MessageKit */; };
@@ -93,7 +95,6 @@
 		1FE95A4E2878AFC500A79C77 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FE95A4D2878AFC500A79C77 /* Constants.swift */; };
 		1FE95A502878B4CF00A79C77 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FE95A4F2878B4CF00A79C77 /* HomeViewController.swift */; };
 		1FE95A522878B5AA00A79C77 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FE95A512878B5AA00A79C77 /* ProfileViewController.swift */; };
-		1FE95A552878B6B900A79C77 /* MainTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FE95A542878B6B900A79C77 /* MainTabBarController.swift */; };
 		1FE95A5B2878E99300A79C77 /* SelectLocationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FE95A5A2878E99300A79C77 /* SelectLocationViewController.swift */; };
 		91765C5EB86B19F52D4BC34D /* Pods_Tarrare.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 56DEEAE22CDC04411E670E42 /* Pods_Tarrare.framework */; };
 /* End PBXBuildFile section */
@@ -153,6 +154,8 @@
 		1F634DFF28935E0F00D027AD /* PendingMatchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PendingMatchViewController.swift; sourceTree = "<group>"; };
 		1F634E03289373A200D027AD /* LoadingCircleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingCircleView.swift; sourceTree = "<group>"; };
 		1F634E0528945CB200D027AD /* DeliverScreenViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeliverScreenViewController.swift; sourceTree = "<group>"; };
+		1F634E072894899300D027AD /* DeliverTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeliverTabBarController.swift; sourceTree = "<group>"; };
+		1F634E0928948D3900D027AD /* OrderTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderTabBarController.swift; sourceTree = "<group>"; };
 		1F993F3B2886195800DD1A54 /* Message.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Message.swift; sourceTree = "<group>"; };
 		1F993F3D2886205500DD1A54 /* OpenChatsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenChatsViewController.swift; sourceTree = "<group>"; };
 		1F993F402886285100DD1A54 /* schema.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; name = schema.json; path = Tarrare/schema.json; sourceTree = SOURCE_ROOT; };
@@ -185,7 +188,6 @@
 		1FE95A4D2878AFC500A79C77 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		1FE95A4F2878B4CF00A79C77 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		1FE95A512878B5AA00A79C77 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
-		1FE95A542878B6B900A79C77 /* MainTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabBarController.swift; sourceTree = "<group>"; };
 		1FE95A5A2878E99300A79C77 /* SelectLocationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectLocationViewController.swift; sourceTree = "<group>"; };
 		1FE95A5C2878F0EC00A79C77 /* Tarrare.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Tarrare.xcconfig; sourceTree = "<group>"; };
 		56DEEAE22CDC04411E670E42 /* Pods_Tarrare.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Tarrare.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -389,7 +391,8 @@
 		1FE95A532878B68000A79C77 /* Tab Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				1FE95A542878B6B900A79C77 /* MainTabBarController.swift */,
+				1F634E072894899300D027AD /* DeliverTabBarController.swift */,
+				1F634E0928948D3900D027AD /* OrderTabBarController.swift */,
 			);
 			path = "Tab Controllers";
 			sourceTree = "<group>";
@@ -600,6 +603,7 @@
 				1FE95A34287640DA00A79C77 /* User.swift in Sources */,
 				1FB83FFE287C89F200E33667 /* LocationUILabel.swift in Sources */,
 				1F2F459B2891ED7900036D40 /* Conversation.swift in Sources */,
+				1F634E082894899300D027AD /* DeliverTabBarController.swift in Sources */,
 				1F2F459D2891EDA000036D40 /* AppLoadingViewController.swift in Sources */,
 				1F634DFC2893181900D027AD /* RestaurantDeliveriesViewController.swift in Sources */,
 				1FE95A4E2878AFC500A79C77 /* Constants.swift in Sources */,
@@ -625,7 +629,7 @@
 				1FE95A362876418D00A79C77 /* LoginViewController.swift in Sources */,
 				1FB84016288096ED00E33667 /* IndividualChatViewController.swift in Sources */,
 				1FB84014287F718B00E33667 /* DeliveryCell.swift in Sources */,
-				1FE95A552878B6B900A79C77 /* MainTabBarController.swift in Sources */,
+				1F634E0A28948D3900D027AD /* OrderTabBarController.swift in Sources */,
 				1FE95A522878B5AA00A79C77 /* ProfileViewController.swift in Sources */,
 				1F993F3C2886195800DD1A54 /* Message.swift in Sources */,
 				1FB84012287F6F4600E33667 /* DeliveryBuilding.swift in Sources */,
