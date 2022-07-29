@@ -9,14 +9,14 @@ import Foundation
 import UIKit
 
 class PendingMatchViewController : UIViewController {
-    public var delivery : Delivery? {
+    public var order: Order? {
         didSet {
-            guard let delivery = delivery else { return }
+            guard let order = order else { return }
 
-            deliveryBuildingPlaceItemView.place = delivery.deliveryBuilding.place
+            deliveryBuildingPlaceItemView.place = order.deliveryBuilding.place
             deliveryBuildingPlaceItemView.setImage(image: UIImage(systemName: "mappin.circle.fill")!)
 
-            restaurantPlaceItemView.place = delivery.resturant.place
+            restaurantPlaceItemView.place = order.resturant.place
             restaurantPlaceItemView.setImage(image: UIImage(systemName: "takeoutbag.and.cup.and.straw.fill")!)
         }
     }
@@ -32,7 +32,6 @@ class PendingMatchViewController : UIViewController {
         self.containerView.addSubview(self.footerStackView)
         
         self.loaderContainerView.addSubview(self.loadingCircleView)
-        self.setupLoader()
         
         self.deliveryInfoStackView.addArrangedSubview(deliveryBuildingPlaceItemView)
         self.deliveryInfoStackView.addArrangedSubview(restaurantPlaceItemView)
@@ -41,6 +40,8 @@ class PendingMatchViewController : UIViewController {
         self.footerStackView.addArrangedSubview(infoLabel)
         self.footerStackView.addArrangedSubview(cancelRequestButton)
         
+        self.setupLoader()
+        self.setupCancelRequestButton()
     }
     
     override func viewWillLayoutSubviews() {
@@ -141,6 +142,20 @@ class PendingMatchViewController : UIViewController {
         return button
     }()
     
+    // MARK: - Gestures/Actions
+    
+    @objc func cancelRequest(_ sender: Any) {
+        guard let order = self.order else { return }
+
+        Order.cancelOrder(orderId: order.id, completion: { _ in
+            self.dismiss(animated: true)
+        })
+    }
+    
+    func setupCancelRequestButton() {
+        self.cancelRequestButton.addTarget(self, action: #selector(cancelRequest(_:)), for: .touchUpInside)
+    }
+    
 }
 
 class CustomPlaceLocationView : UIView {
@@ -149,7 +164,7 @@ class CustomPlaceLocationView : UIView {
             guard let place = place else { return }
 
             locationNameLabel.text = place.name
-            locationAddressLabel.text = "2230 Guadalupe, Austin TX 78705"
+            locationAddressLabel.text = place.fullAddress
         }
     }
     

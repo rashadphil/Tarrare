@@ -130,8 +130,10 @@ extension RestaurantDeliveriesViewController : DeliveryCellProtocol {
         
         Order.createOrder(userId: currentUser.id, resturantPlaceId: tappedDelivery.resturantPlaceId, deliveryBuildingPlaceId: tappedDelivery.deliveryBuildingPlaceId, completion: {createdOrder in
             
-            // TODO (rashadphil) : present a pending match acceptance view controller
-            
+            let pendingMatchVC = PendingMatchViewController()
+            pendingMatchVC.order = createdOrder
+            pendingMatchVC.modalPresentationStyle = .fullScreen
+            self.present(pendingMatchVC, animated: true)
         })
     }
     
