@@ -8,41 +8,41 @@
 import Foundation
 import UIKit
 extension UIView {
- 
-     func anchor (top: NSLayoutYAxisAnchor?, left: NSLayoutXAxisAnchor?, bottom: NSLayoutYAxisAnchor?, right: NSLayoutXAxisAnchor?, paddingTop: CGFloat, paddingLeft: CGFloat, paddingBottom: CGFloat, paddingRight: CGFloat, width: CGFloat, height: CGFloat, enableInsets: Bool) {
-         
-         var topInset = CGFloat(0)
-         var bottomInset = CGFloat(0)
-     
-         if #available(iOS 11, *), enableInsets {
-             let insets = self.safeAreaInsets
-             topInset = insets.top
-             bottomInset = insets.bottom
-         }
-     
-         translatesAutoresizingMaskIntoConstraints = false
-         
-         if let top = top {
-             self.topAnchor.constraint(equalTo: top, constant: paddingTop+topInset).isActive = true
-         }
-         if let left = left {
-             self.leftAnchor.constraint(equalTo: left, constant: paddingLeft).isActive = true
-         }
-         if let right = right {
-             rightAnchor.constraint(equalTo: right, constant: -paddingRight).isActive = true
-         }
-         if let bottom = bottom {
-             bottomAnchor.constraint(equalTo: bottom, constant: -paddingBottom-bottomInset).isActive = true
-         }
-         if height != 0 {
-             heightAnchor.constraint(equalToConstant: height).isActive = true
-         }
-         if width != 0 {
-             widthAnchor.constraint(equalToConstant: width).isActive = true
-         }
-     
-     }
- 
+    
+    func anchor (top: NSLayoutYAxisAnchor?, left: NSLayoutXAxisAnchor?, bottom: NSLayoutYAxisAnchor?, right: NSLayoutXAxisAnchor?, paddingTop: CGFloat, paddingLeft: CGFloat, paddingBottom: CGFloat, paddingRight: CGFloat, width: CGFloat, height: CGFloat, enableInsets: Bool) {
+        
+        var topInset = CGFloat(0)
+        var bottomInset = CGFloat(0)
+        
+        if #available(iOS 11, *), enableInsets {
+            let insets = self.safeAreaInsets
+            topInset = insets.top
+            bottomInset = insets.bottom
+        }
+        
+        translatesAutoresizingMaskIntoConstraints = false
+        
+        if let top = top {
+            self.topAnchor.constraint(equalTo: top, constant: paddingTop+topInset).isActive = true
+        }
+        if let left = left {
+            self.leftAnchor.constraint(equalTo: left, constant: paddingLeft).isActive = true
+        }
+        if let right = right {
+            rightAnchor.constraint(equalTo: right, constant: -paddingRight).isActive = true
+        }
+        if let bottom = bottom {
+            bottomAnchor.constraint(equalTo: bottom, constant: -paddingBottom-bottomInset).isActive = true
+        }
+        if height != 0 {
+            heightAnchor.constraint(equalToConstant: height).isActive = true
+        }
+        if width != 0 {
+            widthAnchor.constraint(equalToConstant: width).isActive = true
+        }
+        
+    }
+    
 }
 
 extension UIViewController {
@@ -66,7 +66,7 @@ extension UIImageView {
                 let mimeType = response?.mimeType, mimeType.hasPrefix("image"),
                 let data = data, error == nil,
                 let image = UIImage(data: data)
-                else { return }
+            else { return }
             DispatchQueue.main.async() { [weak self] in
                 self?.image = image
             }
@@ -94,5 +94,33 @@ extension UIStackView {
         separator.heightAnchor.constraint(equalToConstant: 1).isActive = true
         separator.backgroundColor = color
         return separator
+    }
+}
+
+extension UIColor {
+    public convenience init?(hex: String, alpha: CGFloat = 1.0) {
+        
+        if (hex.hasPrefix("#")) {
+            let start = hex.index(hex.startIndex, offsetBy: 1)
+            let hexColor = String(hex[start...])
+        
+            var color: UInt32 = 0
+            let scanner = Scanner(string: hexColor)
+            scanner.scanHexInt32(&color)
+            
+            let mask = 0x000000FF
+            
+            let r = Int(color >> 16) & mask
+            let g = Int(color >> 8) & mask
+            let b = Int(color) & mask
+            
+            let red   = CGFloat(r) / 255.0
+            let green = CGFloat(g) / 255.0
+            let blue  = CGFloat(b) / 255.0
+            
+            self.init(red:red, green:green, blue:blue, alpha:alpha)
+            return
+        }
+        return nil
     }
 }
