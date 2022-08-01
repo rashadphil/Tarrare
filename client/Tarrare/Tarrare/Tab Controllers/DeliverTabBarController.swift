@@ -22,7 +22,7 @@ class DeliverTabBarController: UITabBarController {
         let messageIcon = UITabBarItem(title: "Messages", image: UIImage(systemName: "bubble.left"), selectedImage: UIImage(systemName: "bubble.left.fill"))
         messagesVC.tabBarItem = messageIcon
         
-        let profileVC = UINavigationController(rootViewController: ProfileViewController())
+        let profileVC = UINavigationController(rootViewController: DeliverProfileViewController())
         let profileIcon = UITabBarItem(title: "Profile", image: UIImage(systemName: "person"), selectedImage: UIImage(systemName: "person.fill"))
         profileVC.tabBarItem = profileIcon
         
