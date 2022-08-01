@@ -29,6 +29,8 @@ class OrderMatchViewController : UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.addChatIconGesture()
+        
         self.view.backgroundColor = .white
         title = "Order Matched!"
         
@@ -67,7 +69,7 @@ class OrderMatchViewController : UIViewController {
     let containerView : UIStackView = {
         let stackview = UIStackView()
         stackview.axis = .vertical
-        stackview.distribution = .fillProportionally
+        stackview.distribution = .equalSpacing
         stackview.spacing = 10
         stackview.translatesAutoresizingMaskIntoConstraints = false
         return stackview
@@ -98,6 +100,20 @@ class OrderMatchViewController : UIViewController {
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
+    
+    
+    //MARK: - Gestures/Actions
+    @objc func didTapChatIcon(_ sender: Any) {
+        guard let delivererUser = match?.delivery.user else { return }
+        
+        let individualChatVC = IndividualChatViewController()
+        individualChatVC.targetUser = delivererUser
+        self.navigationController?.show(individualChatVC, sender: self)
+    }
+    
+    func addChatIconGesture() {
+        self.delivererUserView.chatIconButton.addTarget(self, action: #selector(didTapChatIcon(_:)), for: .touchUpInside)
+    }
 }
 
 class DelivererUserView : UIView {
@@ -140,7 +156,7 @@ class DelivererUserView : UIView {
         self.nameAndTitleStackView.anchor(top: nil, left: self.profilePictureImageView.rightAnchor, bottom: nil, right: nil, paddingTop: 0, paddingLeft: 10, paddingBottom: 0, paddingRight: 0, width: 0, height: 0, enableInsets: false)
         self.nameAndTitleStackView.centerYAnchor.constraint(equalTo: self.centerYAnchor).isActive = true
         
-        self.chatIconView.anchor(top: self.topAnchor, left: nil, bottom: self.bottomAnchor, right: self.rightAnchor, paddingTop: 0, paddingLeft: 0, paddingBottom: 0, paddingRight: 40, width: 0, height: 0, enableInsets: false)
+        self.chatIconView.anchor(top: self.topAnchor, left: self.nameAndTitleStackView.rightAnchor, bottom: self.bottomAnchor, right: self.rightAnchor, paddingTop: 0, paddingLeft: 0, paddingBottom: 0, paddingRight: 0, width: 70, height: 0, enableInsets: false)
         
 
         self.chatIconButton.anchor(top: nil, left: nil, bottom: nil, right: nil, paddingTop: 0, paddingLeft: 0, paddingBottom: 0, paddingRight: 0, width: 35, height: 35, enableInsets: false)

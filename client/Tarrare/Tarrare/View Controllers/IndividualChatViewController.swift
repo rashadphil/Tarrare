@@ -42,26 +42,7 @@ class IndividualChatViewController : MessagesViewController {
     func setupNavbar() {
         navigationItem.titleView?.tintColor = .black
         navigationItem.title = self.targetUser?.firstName
-        navigationItem.rightBarButtonItem = UIBarButtonItem(customView: requestButton)
     }
-    
-    private let requestButton : UIButton = {
-        let button = UIButton()
-        button.setTitle("Request ", for: .normal)
-        button.setTitleColor(.white, for: .normal)
-        button.titleLabel?.font = UIFont(name: "Inter-Regular", size: 15)
-        button.backgroundColor = .black
-        button.layer.cornerRadius = 15
-        button.frame = CGRect(x: 0, y: 0, width: 90, height: 40)
-        
-        
-        let buttonImage = UIImage(systemName: "takeoutbag.and.cup.and.straw")
-        button.setImage(buttonImage, for: .normal)
-        button.tintColor = .white
-        
-        button.addTarget(self, action: #selector(didTapRequestButton), for: .touchUpInside)
-        return button
-    }()
     
     // MARK: - API Requests
     
