@@ -66,6 +66,7 @@
 		1F634E0C2894920F00D027AD /* OrderProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F634E0B2894920F00D027AD /* OrderProfileViewController.swift */; };
 		1F634E0E2894943400D027AD /* DeliverProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F634E0D2894943400D027AD /* DeliverProfileViewController.swift */; };
 		1F634E1028949D0F00D027AD /* SwitchingTarrareViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F634E0F28949D0F00D027AD /* SwitchingTarrareViewController.swift */; };
+		1F634E1428984BC800D027AD /* OrderMatchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F634E1328984BC800D027AD /* OrderMatchViewController.swift */; };
 		1F993F342885C8A200DD1A54 /* Apollo in Frameworks */ = {isa = PBXBuildFile; productRef = 1F993F332885C8A200DD1A54 /* Apollo */; };
 		1F993F362885C8A200DD1A54 /* ApolloWebSocket in Frameworks */ = {isa = PBXBuildFile; productRef = 1F993F352885C8A200DD1A54 /* ApolloWebSocket */; };
 		1F993F3A28860F4B00DD1A54 /* MessageKit in Frameworks */ = {isa = PBXBuildFile; productRef = 1F993F3928860F4B00DD1A54 /* MessageKit */; };
@@ -161,6 +162,7 @@
 		1F634E0B2894920F00D027AD /* OrderProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderProfileViewController.swift; sourceTree = "<group>"; };
 		1F634E0D2894943400D027AD /* DeliverProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeliverProfileViewController.swift; sourceTree = "<group>"; };
 		1F634E0F28949D0F00D027AD /* SwitchingTarrareViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwitchingTarrareViewController.swift; sourceTree = "<group>"; };
+		1F634E1328984BC800D027AD /* OrderMatchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderMatchViewController.swift; sourceTree = "<group>"; };
 		1F993F3B2886195800DD1A54 /* Message.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Message.swift; sourceTree = "<group>"; };
 		1F993F3D2886205500DD1A54 /* OpenChatsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenChatsViewController.swift; sourceTree = "<group>"; };
 		1F993F402886285100DD1A54 /* schema.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; name = schema.json; path = Tarrare/schema.json; sourceTree = SOURCE_ROOT; };
@@ -364,6 +366,7 @@
 				1F634E0B2894920F00D027AD /* OrderProfileViewController.swift */,
 				1F634E0D2894943400D027AD /* DeliverProfileViewController.swift */,
 				1F634E0F28949D0F00D027AD /* SwitchingTarrareViewController.swift */,
+				1F634E1328984BC800D027AD /* OrderMatchViewController.swift */,
 			);
 			path = "View Controllers";
 			sourceTree = "<group>";
@@ -622,6 +625,7 @@
 				1F2F459F2891EDC000036D40 /* Order.swift in Sources */,
 				1F993F4328862A8100DD1A54 /* API.swift in Sources */,
 				1FE95A452877880C00A79C77 /* APIManager.swift in Sources */,
+				1F634E1428984BC800D027AD /* OrderMatchViewController.swift in Sources */,
 				1FE95A42287764E700A79C77 /* TarrareTextField.swift in Sources */,
 				1FE95A402877575300A79C77 /* RegisterViewController.swift in Sources */,
 				1FB84002287C9BEF00E33667 /* PlaceCell.swift in Sources */,

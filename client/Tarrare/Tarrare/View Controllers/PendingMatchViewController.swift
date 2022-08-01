@@ -229,7 +229,7 @@ class CustomPlaceLocationView : UIView {
     
     let locationAddressLabel : UILabel = {
         let label = UILabel()
-        label.font = UIFont(name: Constants.FontDefaults.medium, size: 18)
+        label.font = UIFont(name: Constants.FontDefaults.medium, size: 16)
         label.numberOfLines = 0
         label.textColor = UIColor(named: "DarkGray")!
         label.translatesAutoresizingMaskIntoConstraints = false
