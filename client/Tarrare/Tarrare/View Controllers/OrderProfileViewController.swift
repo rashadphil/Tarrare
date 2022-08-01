@@ -23,14 +23,16 @@ class OrderProfileViewController: UIViewController {
         
         view.addSubview(containerView)
         
-        buttonStackView.addArrangedSubview(switchToOrderingButton)
+        buttonStackView.addArrangedSubview(switchToDeliveringButton)
         buttonStackView.addArrangedSubview(logoutButton)
         
         containerView.addSubview(headerView)
         containerView.addSubview(buttonStackView)
         
         headerView.addSubview(nameLabel)
+        
         addLogoutButtonGesture()
+        addSwitchToDeliveringGesture()
     }
     
     override func viewDidLayoutSubviews() {
@@ -75,7 +77,7 @@ class OrderProfileViewController: UIViewController {
         return stackview
     }()
     
-    private let switchToOrderingButton : UIButton = {
+    private let switchToDeliveringButton : UIButton = {
         let button = UIButton()
         button.setTitle("Switch to delivering", for: .normal)
         button.setTitleColor(.black, for: .normal)
@@ -117,6 +119,18 @@ class OrderProfileViewController: UIViewController {
                 UserDefaults.standard.set(nil, forKey: Constants.UserDefaults.currentUser)
             }
         })
+    }
+    
+    func addSwitchToDeliveringGesture() {
+        switchToDeliveringButton.addTarget(self, action: #selector(switchToDelivering), for: .touchUpInside)
+    }
+    
+    @objc func switchToDelivering() {
+        let transitionScreen = SwitchingTarrareViewController()
+        transitionScreen.currentTarrare = .ordering
+        transitionScreen.modalPresentationStyle = .fullScreen
+        transitionScreen.modalTransitionStyle = .crossDissolve
+        self.present(transitionScreen, animated: true)
     }
 }
 

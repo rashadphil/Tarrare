@@ -23,17 +23,20 @@ class SwitchingTarrareViewController : UIViewController {
                 iconImageView.image = UIImage(named: "figure.walk.motion")
                 endIconImage = UIImage(systemName: "takeoutbag.and.cup.and.straw")
                 switchingLabel.text = "Switching to ordering"
+                endViewController = OrderTabBarController()
                 break
             case .ordering:
                 iconImageView.image = UIImage(systemName: "takeoutbag.and.cup.and.straw")
                 endIconImage = UIImage(named: "figure.walk.motion")
                 switchingLabel.text = "Switching to delivering"
+                endViewController = DeliverTabBarController()
                 break
             }
         }
     }
     
     var endIconImage : UIImage?
+    var endViewController : UIViewController?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -48,7 +51,7 @@ class SwitchingTarrareViewController : UIViewController {
     func animateIcon() {
         let firstHalfRotationTransform = CATransform3DRotate(self.iconImageView.layer.transform, CGFloat.pi/2, 0, 1, 0)
         
-        UIView.animate(withDuration: 0.25, delay: 0.3, animations: {
+        UIView.animate(withDuration: 0.2, delay: 0.1, animations: {
             self.iconImageView.layer.transform = firstHalfRotationTransform
             
         }, completion: {_ in
@@ -56,10 +59,20 @@ class SwitchingTarrareViewController : UIViewController {
             self.iconImageView.image = self.endIconImage
             let secondHalfRotationTransform = CATransform3DRotate(self.iconImageView.layer.transform, -CGFloat.pi/2, 0, 1, 0)
             
-            UIView.animate(withDuration: 0.25) {
+            UIView.animate(withDuration: 0.2, animations: {
                 self.iconImageView.layer.transform = secondHalfRotationTransform
-            }
+            }, completion: {_ in
+                self.presentEndingViewController()
+            })
         })
+    }
+    
+    func presentEndingViewController() {
+        guard let endViewController = endViewController else { return }
+
+        endViewController.modalPresentationStyle = .fullScreen
+        endViewController.modalTransitionStyle = .crossDissolve
+        self.present(endViewController, animated: true)
     }
     
     override func viewWillLayoutSubviews() {

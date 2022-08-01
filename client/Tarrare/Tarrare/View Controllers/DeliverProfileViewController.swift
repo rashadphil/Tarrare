@@ -30,7 +30,9 @@ class DeliverProfileViewController: UIViewController {
         containerView.addSubview(buttonStackView)
         
         headerView.addSubview(nameLabel)
+        
         addLogoutButtonGesture()
+        addSwitchToOrderingGesture()
     }
     
     override func viewDidLayoutSubviews() {
@@ -117,6 +119,18 @@ class DeliverProfileViewController: UIViewController {
                 UserDefaults.standard.set(nil, forKey: Constants.UserDefaults.currentUser)
             }
         })
+    }
+    
+    func addSwitchToOrderingGesture() {
+        switchToOrderingButton.addTarget(self, action: #selector(switchToOrdering), for: .touchUpInside)
+    }
+    
+    @objc func switchToOrdering() {
+        let transitionScreen = SwitchingTarrareViewController()
+        transitionScreen.currentTarrare = .delivering
+        transitionScreen.modalPresentationStyle = .fullScreen
+        transitionScreen.modalTransitionStyle = .crossDissolve
+        self.present(transitionScreen, animated: true)
     }
 }
 
