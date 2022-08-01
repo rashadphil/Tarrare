@@ -55,3 +55,9 @@ class Order: Codable {
         APIManager.shared().call(key: "cancelOrder", mutation: CancelOrderMutation(orderId: orderId), completion: completion)
     }
 }
+
+extension Order : Equatable {
+    static func == (lhs: Order, rhs: Order) -> Bool {
+        return lhs.id == rhs.id
+    }
+}

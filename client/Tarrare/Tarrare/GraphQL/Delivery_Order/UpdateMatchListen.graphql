@@ -1,0 +1,6 @@
+subscription UpdateMatchListen {
+  matchUpdate {
+    ...MatchInfo
+  }
+}
+

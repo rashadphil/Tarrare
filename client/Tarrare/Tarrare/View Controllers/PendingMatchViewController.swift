@@ -11,6 +11,7 @@ import UIKit
 class PendingMatchViewController : UIViewController {
     public var order: Order? {
         didSet {
+            Order.userCurrent = order
             guard let order = order else { return }
 
             deliveryBuildingPlaceItemView.place = order.deliveryBuilding.place
@@ -23,6 +24,8 @@ class PendingMatchViewController : UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.startMatchUpdateListener()
+            
         view.backgroundColor = .white
         
         view.addSubview(self.containerView)
@@ -141,6 +144,30 @@ class PendingMatchViewController : UIViewController {
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
     }()
+    
+    // MARK: - Graphql Subscriptions
+    
+    func startMatchUpdateListener() {
+        Match.updateMatchListen { newMatch in
+            guard let match = newMatch else { return }
+            guard let currentOrder = Order.userCurrent else { return }
+            
+            if match.order == currentOrder {
+                
+                if match.delivererAccepted {
+                    let orderMatchVC = OrderMatchViewController()
+                    orderMatchVC.match = newMatch
+                    
+                    let navController = UINavigationController(rootViewController: orderMatchVC)
+                    navController.modalPresentationStyle = .fullScreen
+                    self.present(navController, animated: true)
+                    
+                } else {
+                    self.dismiss(animated: true)
+                }
+            }
+        }
+    }
     
     // MARK: - Gestures/Actions
     

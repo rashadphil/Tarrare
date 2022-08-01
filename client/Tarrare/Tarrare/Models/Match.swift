@@ -41,5 +41,9 @@ class Match: Codable {
         let _ = APIManager.shared().call(key: "newMatch", subscription: NewMatchListenSubscription(), completion: completion)
     }
     
+    static func updateMatchListen(completion: @escaping(Match?) -> Void) {
+        let _ = APIManager.shared().call(key: "matchUpdate", subscription: UpdateMatchListenSubscription(), completion: completion)
+    }
+    
 }
 
