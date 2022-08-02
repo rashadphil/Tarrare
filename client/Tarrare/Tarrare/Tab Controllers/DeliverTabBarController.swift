@@ -58,11 +58,22 @@ class DeliverTabBarController: UITabBarController {
         
         Message.messageListenForUserId(currentUser.id, completion: {newMessage in
             guard let newMessage = newMessage else { return }
+            if newMessage.recieverUser != currentUser { return }
             
             let notification = ChatNotification()
+            notification.delegate = self
             notification.message = newMessage
             notification.display()
         })
     }
-    
+}
+
+extension DeliverTabBarController : ChatNotificationDelegate {
+    func didTapNotificationMessage(_ message: Message) {
+        let individualChatVC = IndividualChatViewController()
+        individualChatVC.targetUser = message.senderUser
+        
+        let navController = self.selectedViewController
+        navController?.show(individualChatVC, sender: self)
+    }
 }

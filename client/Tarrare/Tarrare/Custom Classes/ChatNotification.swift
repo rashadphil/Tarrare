@@ -9,6 +9,10 @@ import Foundation
 import SwiftMessages
 import UIKit
 
+protocol ChatNotificationDelegate {
+    func didTapNotificationMessage(_ message: Message)
+}
+
 class ChatNotification {
     var message : Message? {
         didSet {
@@ -18,8 +22,10 @@ class ChatNotification {
             self.messageView.bodyLabel?.text = message.text
         }
     }
+    var delegate : ChatNotificationDelegate!
     
     func display(){
+        self.addNotificationSelectGesture()
         SwiftMessages.show(config: self.messageConfig, view: self.messageView)
     }
     
@@ -50,6 +56,14 @@ class ChatNotification {
         
         return view
     }()
-        
+    
+    func addNotificationSelectGesture() {
+        self.messageView.tapHandler = { _ in
+            SwiftMessages.hide()
+            guard let message = self.message else { return }
+            self.delegate.didTapNotificationMessage(message)
+        }
+    }
+    
 }
 
