@@ -12,6 +12,7 @@ class DeliverTabBarController: UITabBarController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.startMatchListener()
+        self.startMessageListener()
         
         view.backgroundColor = .white
         
@@ -33,6 +34,7 @@ class DeliverTabBarController: UITabBarController {
         self.tabBar.unselectedItemTintColor = .darkGray
     }
     
+    
     // MARK: - Lifetime GraphQL Subscriptions
     
     func startMatchListener() {
@@ -49,6 +51,18 @@ class DeliverTabBarController: UITabBarController {
                 self.present(navController, animated: true)
             }
         }
+    }
+    
+    func startMessageListener() {
+        guard let currentUser = User.getCurrent() else { return }
+        
+        Message.messageListenForUserId(currentUser.id, completion: {newMessage in
+            guard let newMessage = newMessage else { return }
+            
+            let notification = ChatNotification()
+            notification.message = newMessage
+            notification.display()
+        })
     }
     
 }

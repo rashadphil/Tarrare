@@ -70,6 +70,8 @@
 		1F634E1628987CDE00D027AD /* UpdateMatchListen.graphql in Resources */ = {isa = PBXBuildFile; fileRef = 1F634E1528987CDE00D027AD /* UpdateMatchListen.graphql */; };
 		1F634E1728987E3500D027AD /* API.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F993F4228862A6600DD1A54 /* API.swift */; };
 		1F634E1828987E4700D027AD /* schema.json in Resources */ = {isa = PBXBuildFile; fileRef = 1F993F402886285100DD1A54 /* schema.json */; };
+		1F634E1B28989A2E00D027AD /* SwiftMessages in Frameworks */ = {isa = PBXBuildFile; productRef = 1F634E1A28989A2E00D027AD /* SwiftMessages */; };
+		1F634E1D28989F8600D027AD /* ChatNotification.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F634E1C28989F8600D027AD /* ChatNotification.swift */; };
 		1F993F342885C8A200DD1A54 /* Apollo in Frameworks */ = {isa = PBXBuildFile; productRef = 1F993F332885C8A200DD1A54 /* Apollo */; };
 		1F993F362885C8A200DD1A54 /* ApolloWebSocket in Frameworks */ = {isa = PBXBuildFile; productRef = 1F993F352885C8A200DD1A54 /* ApolloWebSocket */; };
 		1F993F3A28860F4B00DD1A54 /* MessageKit in Frameworks */ = {isa = PBXBuildFile; productRef = 1F993F3928860F4B00DD1A54 /* MessageKit */; };
@@ -166,6 +168,7 @@
 		1F634E0F28949D0F00D027AD /* SwitchingTarrareViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwitchingTarrareViewController.swift; sourceTree = "<group>"; };
 		1F634E1328984BC800D027AD /* OrderMatchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderMatchViewController.swift; sourceTree = "<group>"; };
 		1F634E1528987CDE00D027AD /* UpdateMatchListen.graphql */ = {isa = PBXFileReference; lastKnownFileType = text; path = UpdateMatchListen.graphql; sourceTree = "<group>"; };
+		1F634E1C28989F8600D027AD /* ChatNotification.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatNotification.swift; sourceTree = "<group>"; };
 		1F993F3B2886195800DD1A54 /* Message.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Message.swift; sourceTree = "<group>"; };
 		1F993F3D2886205500DD1A54 /* OpenChatsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenChatsViewController.swift; sourceTree = "<group>"; };
 		1F993F402886285100DD1A54 /* schema.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = schema.json; sourceTree = "<group>"; };
@@ -213,6 +216,7 @@
 				1F2F45CD2892060000036D40 /* SystemConfiguration.framework in Frameworks */,
 				1F2F45CB289205FB00036D40 /* QuartzCore.framework in Frameworks */,
 				1F2F45C9289205F600036D40 /* OpenGLES.framework in Frameworks */,
+				1F634E1B28989A2E00D027AD /* SwiftMessages in Frameworks */,
 				1F2F45D12892065500036D40 /* GooglePlaces.xcframework in Frameworks */,
 				1F2F45C7289205F100036D40 /* Metal.framework in Frameworks */,
 				1F2F45C5289205EC00036D40 /* libz.tbd in Frameworks */,
@@ -290,6 +294,7 @@
 				1F2F45A22891EDF500036D40 /* ConvoCell.swift */,
 				1F2F45DA28920F7900036D40 /* RestaurantCell.swift */,
 				1F634E03289373A200D027AD /* LoadingCircleView.swift */,
+				1F634E1C28989F8600D027AD /* ChatNotification.swift */,
 			);
 			path = "Custom Classes";
 			sourceTree = "<group>";
@@ -470,6 +475,7 @@
 				1F993F332885C8A200DD1A54 /* Apollo */,
 				1F993F352885C8A200DD1A54 /* ApolloWebSocket */,
 				1F993F3928860F4B00DD1A54 /* MessageKit */,
+				1F634E1A28989A2E00D027AD /* SwiftMessages */,
 			);
 			productName = Tarrare;
 			productReference = 1FE95A1A2874F6D300A79C77 /* Tarrare.app */;
@@ -502,6 +508,7 @@
 			packageReferences = (
 				1F993F322885C8A200DD1A54 /* XCRemoteSwiftPackageReference "apollo-ios" */,
 				1F993F3828860F4B00DD1A54 /* XCRemoteSwiftPackageReference "MessageKit" */,
+				1F634E1928989A2D00D027AD /* XCRemoteSwiftPackageReference "SwiftMessages" */,
 			);
 			productRefGroup = 1FE95A1B2874F6D300A79C77 /* Products */;
 			projectDirPath = "";
@@ -631,6 +638,7 @@
 				1FE95A1E2874F6D300A79C77 /* AppDelegate.swift in Sources */,
 				1F2F459F2891EDC000036D40 /* Order.swift in Sources */,
 				1FE95A452877880C00A79C77 /* APIManager.swift in Sources */,
+				1F634E1D28989F8600D027AD /* ChatNotification.swift in Sources */,
 				1F634E1428984BC800D027AD /* OrderMatchViewController.swift in Sources */,
 				1FE95A42287764E700A79C77 /* TarrareTextField.swift in Sources */,
 				1FE95A402877575300A79C77 /* RegisterViewController.swift in Sources */,
@@ -882,6 +890,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		1F634E1928989A2D00D027AD /* XCRemoteSwiftPackageReference "SwiftMessages" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/SwiftKickMobile/SwiftMessages";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 9.0.0;
+			};
+		};
 		1F993F322885C8A200DD1A54 /* XCRemoteSwiftPackageReference "apollo-ios" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/apollographql/apollo-ios";
@@ -901,6 +917,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		1F634E1A28989A2E00D027AD /* SwiftMessages */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 1F634E1928989A2D00D027AD /* XCRemoteSwiftPackageReference "SwiftMessages" */;
+			productName = SwiftMessages;
+		};
 		1F993F332885C8A200DD1A54 /* Apollo */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 1F993F322885C8A200DD1A54 /* XCRemoteSwiftPackageReference "apollo-ios" */;
